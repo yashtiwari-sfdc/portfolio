@@ -1,153 +1,1282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yash Tiwari - Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yash Tiwari | Salesforce Developer · Trailblazer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Salesforce+Sans:wght@300;400;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── TOKENS ─────────────────────────────────── */
+    :root {
+      --sf-navy:       #032D60;
+      --sf-blue:       #0070D2;
+      --sf-blue-light: #1B96FF;
+      --sf-sky:        #D8EDFF;
+      --sf-teal:       #06A59A;
+      --sf-green:      #2E844A;
+      --sf-orange:     #E8830A;
+      --sf-red:        #C23934;
+      --sf-purple:     #7526E3;
+      --sf-sand:       #FFF3E0;
+      --sf-yellow:     #FFB75D;
+      --bg:            #F3F2F2;
+      --card:          #FFFFFF;
+      --border:        #DDDBDA;
+      --text:          #181818;
+      --text-mid:      #444444;
+      --text-soft:     #6B6B6B;
+      --text-muted:    #929292;
+      --shadow:        0 2px 12px rgba(0,0,0,.10);
+      --shadow-md:     0 4px 24px rgba(0,0,0,.14);
+      --radius:        12px;
+      --radius-lg:     20px;
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:#e0e0e0}
+    ::-webkit-scrollbar-thumb{background:var(--sf-blue);border-radius:3px}
+
+    /* ── NAV ─────────────────────────────────────── */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:1000;
+      background:var(--sf-navy);
+      height:56px;display:flex;align-items:center;
+      padding:0 1.5rem;gap:1.25rem;
+      box-shadow:0 2px 8px rgba(3,45,96,.4);
+    }
+    .nav-logo{display:flex;align-items:center;gap:0.6rem;text-decoration:none;flex-shrink:0}
+    .nav-logo-text{color:#fff;font-weight:700;font-size:1rem;letter-spacing:-.2px}
+    .nav-divider{width:1px;height:24px;background:rgba(255,255,255,.25);flex-shrink:0}
+    .nav-trail{color:rgba(255,255,255,.7);font-size:.82rem;font-weight:500}
+    .nav-links{display:flex;gap:0;list-style:none;margin-left:auto}
+    .nav-links a{
+      color:rgba(255,255,255,.8);text-decoration:none;font-size:.82rem;
+      padding:.4rem .85rem;border-radius:6px;font-weight:500;
+      transition:background .15s,color .15s;white-space:nowrap;
+    }
+    .nav-links a:hover{background:rgba(255,255,255,.12);color:#fff}
+    .nav-cta{
+      background:var(--sf-blue)!important;color:#fff!important;
+      border-radius:6px!important;font-weight:600!important;
+      padding:.4rem 1rem!important;
+    }
+    .nav-cta:hover{background:var(--sf-blue-light)!important}
+
+    /* ── HERO / PROFILE ──────────────────────────── */
+    #hero{padding-top:56px}
+
+    .profile-banner{
+      height:200px;
+      background: linear-gradient(135deg, #032D60 0%, #0070D2 50%, #06A59A 100%);
+      position:relative;overflow:hidden;
+    }
+    .banner-pattern{
+      position:absolute;inset:0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(255,255,255,.06) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,.08) 0%, transparent 40%),
+        radial-gradient(circle at 60% 80%, rgba(6,165,154,.15) 0%, transparent 40%);
+    }
+    .banner-clouds{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;padding-right:3rem;gap:2rem;opacity:.12}
+
+    .profile-container{max-width:1100px;margin:0 auto;padding:0 2rem}
+
+    .profile-card{
+      background:var(--card);border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-md);
+      padding:0 2rem 2rem;
+      margin-top:-80px;
+      position:relative;
+      border:1px solid var(--border);
+    }
+
+    .profile-top{display:flex;align-items:flex-end;gap:1.5rem;padding-top:1.25rem;flex-wrap:wrap}
+
+    .avatar-wrap{position:relative;flex-shrink:0;margin-top:-70px}
+    .avatar-ring{
+      width:120px;height:120px;border-radius:50%;
+      border:4px solid #fff;
+      box-shadow:0 4px 16px rgba(0,0,0,.2);
+      overflow:hidden;background:var(--sf-sky);
+      display:flex;align-items:center;justify-content:center;
+    }
+    .avatar-ring img{width:100%;height:100%;object-fit:cover}
+    .rank-badge{
+      position:absolute;bottom:4px;right:4px;
+      width:32px;height:32px;border-radius:50%;
+      background:linear-gradient(135deg,#E8830A,#FFB75D);
+      border:2px solid #fff;
+      display:flex;align-items:center;justify-content:center;
+      font-size:.7rem;box-shadow:0 2px 6px rgba(0,0,0,.2);
+    }
+
+    .profile-info{flex:1;padding-bottom:.25rem;min-width:200px}
+    .profile-name{font-size:1.6rem;font-weight:800;color:var(--sf-navy);letter-spacing:-.5px;line-height:1.2}
+    .profile-role{
+      display:inline-flex;align-items:center;gap:.4rem;
+      font-size:.85rem;font-weight:600;color:var(--sf-blue);
+      margin:.25rem 0 .5rem;
+    }
+    .profile-location{font-size:.82rem;color:var(--text-soft);display:flex;align-items:center;gap:.4rem}
+
+    .profile-stats{
+      display:flex;gap:1.5rem;margin-left:auto;flex-wrap:wrap;
+      padding-bottom:.25rem;
+    }
+    .stat-pill{text-align:center}
+    .stat-pill-num{font-size:1.4rem;font-weight:800;color:var(--sf-navy);line-height:1}
+    .stat-pill-label{font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-top:.2rem;white-space:nowrap}
+
+    .profile-bio{
+      margin-top:1.25rem;padding-top:1.25rem;
+      border-top:1px solid var(--border);
+      font-size:.9rem;color:var(--text-mid);line-height:1.7;
+    }
+
+    .profile-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+    .ptag{
+      font-size:.75rem;font-weight:600;padding:.3rem .75rem;border-radius:20px;
+      background:var(--sf-sky);color:var(--sf-blue);border:1px solid rgba(0,112,210,.2);
+    }
+    .ptag.orange{background:#FFF3E0;color:var(--sf-orange);border-color:rgba(232,131,10,.2)}
+    .ptag.teal{background:#E8F9F8;color:var(--sf-teal);border-color:rgba(6,165,154,.2)}
+    .ptag.green{background:#EFF7EE;color:var(--sf-green);border-color:rgba(46,132,74,.2)}
+
+    .profile-actions{display:flex;gap:.75rem;margin-top:1.25rem;flex-wrap:wrap}
+
+    .btn-primary{
+      background:var(--sf-blue);color:#fff;border:none;
+      padding:.6rem 1.4rem;border-radius:6px;font-size:.875rem;font-weight:600;
+      cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;
+      transition:background .15s,transform .15s;
+    }
+    .btn-primary:hover{background:var(--sf-blue-light);transform:translateY(-1px)}
+
+    .btn-outline{
+      background:transparent;color:var(--sf-blue);
+      border:1px solid var(--sf-blue);
+      padding:.6rem 1.4rem;border-radius:6px;font-size:.875rem;font-weight:600;
+      cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;
+      transition:background .15s;
+    }
+    .btn-outline:hover{background:var(--sf-sky)}
+
+    /* ── BADGES ROW ──────────────────────────────── */
+    #badges{padding:2rem 0}
+    .badges-wrap{max-width:1100px;margin:0 auto;padding:0 2rem}
+    .badges-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:1rem}
+    .badges-scroll{display:flex;gap:1rem;overflow-x:auto;padding-bottom:.5rem;scrollbar-width:thin}
+    .badge-item{
+      flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:.5rem;
+      width:90px;text-align:center;
+    }
+    .badge-circle{
+      width:72px;height:72px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.6rem;border:3px solid transparent;
+      transition:transform .2s;position:relative;
+    }
+    .badge-circle:hover{transform:scale(1.08)}
+    .badge-circle::after{
+      content:'';position:absolute;inset:-3px;border-radius:50%;
+      background:conic-gradient(var(--color,#0070D2) var(--pct,80%),#e0e0e0 0);
+      z-index:-1;
+    }
+    .badge-circle-inner{
+      width:62px;height:62px;border-radius:50%;
+      background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+    }
+    .badge-label{font-size:.65rem;color:var(--text-mid);font-weight:600;line-height:1.3}
+
+    /* ── SECTION LAYOUT ──────────────────────────── */
+    .main-grid{
+      max-width:1100px;margin:0 auto;padding:0 2rem 4rem;
+      display:grid;grid-template-columns:1fr 340px;gap:1.5rem;
+    }
+    .main-col{display:flex;flex-direction:column;gap:1.5rem}
+
+    .sf-card{
+      background:var(--card);border-radius:var(--radius);
+      border:1px solid var(--border);box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .sf-card-header{
+      padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .sf-card-title{
+      font-size:.95rem;font-weight:700;color:var(--sf-navy);
+      display:flex;align-items:center;gap:.5rem;
+    }
+    .sf-card-icon{
+      width:28px;height:28px;border-radius:6px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:.85rem;flex-shrink:0;
+    }
+    .sf-card-body{padding:1.25rem 1.5rem}
+    .card-link{font-size:.8rem;color:var(--sf-blue);font-weight:600;text-decoration:none}
+    .card-link:hover{text-decoration:underline}
+
+    /* ── SKILL PILLS ─────────────────────────────── */
+    .skill-group{margin-bottom:1.25rem}
+    .skill-group:last-child{margin-bottom:0}
+    .skill-group-label{
+      font-size:.7rem;font-weight:700;text-transform:uppercase;
+      letter-spacing:1px;color:var(--text-muted);margin-bottom:.6rem;
+    }
+    .skill-pills{display:flex;flex-wrap:wrap;gap:.4rem}
+    .skill-pill{
+      font-size:.78rem;font-weight:600;padding:.3rem .75rem;
+      border-radius:4px;display:flex;align-items:center;gap:.35rem;
+    }
+    .sp-blue{background:var(--sf-sky);color:var(--sf-blue)}
+    .sp-orange{background:#FFF3E0;color:var(--sf-orange)}
+    .sp-teal{background:#E8F9F8;color:var(--sf-teal)}
+    .sp-green{background:#EFF7EE;color:var(--sf-green)}
+    .sp-purple{background:#F5EEFF;color:var(--sf-purple)}
+    .sp-navy{background:#E8EEFF;color:var(--sf-navy)}
+
+    /* ── TRAIL / PROJECT CARD ────────────────────── */
+    .trail-card{
+      background:var(--card);border-radius:var(--radius);
+      border:1px solid var(--border);box-shadow:var(--shadow);
+      overflow:hidden;transition:box-shadow .2s,transform .2s;
+    }
+    .trail-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+
+    .trail-header{
+      padding:1.25rem 1.5rem 0;
+      display:flex;align-items:flex-start;gap:1rem;
+    }
+    .trail-icon{
+      width:52px;height:52px;border-radius:12px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.4rem;flex-shrink:0;
+    }
+    .trail-meta{flex:1}
+    .trail-type{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted)}
+    .trail-title{font-size:1rem;font-weight:700;color:var(--sf-navy);margin:.2rem 0;line-height:1.3}
+
+    .trail-tags{display:flex;flex-wrap:wrap;gap:.35rem;padding:.75rem 1.5rem 0}
+    .trail-tag{
+      font-size:.68rem;font-weight:600;padding:.2rem .55rem;border-radius:3px;
+      background:var(--sf-sky);color:var(--sf-blue);
+    }
+
+    .trail-problem{
+      margin:.75rem 1.5rem 0;padding:.75rem;
+      background:#FFF8F0;border-left:3px solid var(--sf-orange);
+      border-radius:0 6px 6px 0;
+    }
+    .trail-problem-label{font-size:.65rem;font-weight:700;color:var(--sf-orange);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.3rem}
+    .trail-problem-text{font-size:.82rem;color:var(--text-mid);line-height:1.6}
+
+    .trail-arch-wrap{padding:.75rem 1.5rem 0}
+    .trail-arch-label{font-size:.65rem;font-weight:700;color:var(--sf-teal);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.4rem}
+    .trail-arch-chips{display:flex;flex-wrap:wrap;gap:.35rem}
+    .arch-chip{
+      font-size:.7rem;padding:.2rem .55rem;border-radius:4px;
+      background:#E8F9F8;color:var(--sf-teal);border:1px solid rgba(6,165,154,.2);
+      font-family:'JetBrains Mono',monospace;
+    }
+
+    .trail-features{display:grid;grid-template-columns:1fr 1fr;gap:.35rem;padding:.75rem 1.5rem 0}
+    .trail-feat{font-size:.8rem;color:var(--text-mid);display:flex;gap:.4rem;align-items:flex-start}
+    .trail-feat .ck{color:var(--sf-green);flex-shrink:0}
+
+    /* Code block inside trail card */
+    .trail-code{margin:.75rem 0 0;border-top:1px solid var(--border)}
+    .code-bar{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:.5rem 1rem;background:#F9FAFB;border-bottom:1px solid var(--border);
+    }
+    .code-filename{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text-soft);display:flex;align-items:center;gap:.4rem}
+    .code-dot{width:7px;height:7px;border-radius:50%;background:var(--sf-blue)}
+    .code-badge{font-size:.65rem;padding:.15rem .5rem;border-radius:3px;background:#EFF7EE;color:var(--sf-green);font-weight:700;font-family:'JetBrains Mono',monospace;text-transform:uppercase}
+    .trail-pre{
+      margin:0;padding:1rem 1.25rem;
+      font-family:'JetBrains Mono',monospace;font-size:.73rem;
+      line-height:1.75;color:#24292e;background:#F6F8FA;
+      overflow-x:auto;white-space:pre;
+    }
+    .trail-footer{padding:.75rem 1.5rem 1.25rem;display:flex;justify-content:flex-end}
+
+    /* ── SYNTAX COLORS ───────────────────────────── */
+    .kw{color:#D73A49}
+    .cls{color:#6F42C1}
+    .fn{color:#005CC5}
+    .str{color:#032F62}
+    .cmt{color:#6A737D;font-style:italic}
+    .num{color:#005CC5}
+    .ann{color:#E36209}
+
+    /* ── TIMELINE ────────────────────────────────── */
+    .timeline-item{
+      display:flex;gap:1rem;padding:1rem 0;
+      border-bottom:1px solid var(--border);
+    }
+    .timeline-item:last-child{border-bottom:none;padding-bottom:0}
+    .timeline-dot-wrap{display:flex;flex-direction:column;align-items:center;flex-shrink:0;padding-top:.25rem}
+    .timeline-dot{width:14px;height:14px;border-radius:50%;background:var(--sf-blue);border:2px solid #fff;box-shadow:0 0 0 3px rgba(0,112,210,.2)}
+    .timeline-line{width:2px;flex:1;background:linear-gradient(var(--sf-blue),transparent);margin-top:.25rem}
+    .timeline-content{flex:1;padding-bottom:1rem}
+    .tl-role{font-size:.95rem;font-weight:700;color:var(--sf-navy)}
+    .tl-company{font-size:.82rem;color:var(--sf-blue);font-weight:600;margin:.15rem 0}
+    .tl-date{
+      font-size:.72rem;font-family:'JetBrains Mono',monospace;
+      color:#fff;background:var(--sf-navy);padding:.15rem .55rem;border-radius:4px;
+      display:inline-block;margin-bottom:.6rem;
+    }
+    .tl-list{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+    .tl-list li{font-size:.82rem;color:var(--text-mid);display:flex;gap:.5rem;align-items:flex-start}
+    .tl-list .arr{color:var(--sf-blue);flex-shrink:0;font-weight:700}
+    .tl-list strong{color:var(--text)}
+    .tl-impacts{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.6rem}
+    .tl-impact{font-size:.68rem;padding:.2rem .6rem;border-radius:20px;background:#EFF7EE;border:1px solid rgba(46,132,74,.2);color:var(--sf-green);font-weight:600}
+
+    /* ── CERT CARDS ──────────────────────────────── */
+    .cert-badge-card{
+      display:flex;gap:1rem;align-items:center;
+      padding:.9rem;border-radius:10px;
+      border:1px solid var(--border);background:#FAFAFA;
+      transition:border-color .2s,transform .2s;
+    }
+    .cert-badge-card:hover{border-color:var(--sf-blue);transform:translateX(3px)}
+    .cert-badge-icon{
+      width:56px;height:56px;border-radius:50%;flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.5rem;position:relative;
+    }
+    .cert-name{font-size:.88rem;font-weight:700;color:var(--sf-navy)}
+    .cert-by{font-size:.75rem;color:var(--sf-blue);font-weight:600;margin:.1rem 0}
+    .cert-date{font-size:.7rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace}
+    .cert-status{font-size:.65rem;padding:.15rem .55rem;border-radius:3px;font-weight:700;display:inline-block;margin-top:.3rem;font-family:'JetBrains Mono',monospace;text-transform:uppercase}
+    .cs-verified{background:#EFF7EE;color:var(--sf-green);border:1px solid rgba(46,132,74,.25)}
+    .cs-progress{background:#FFF3E0;color:var(--sf-orange);border:1px solid rgba(232,131,10,.25)}
+
+    /* ── THINKING / DECISION ─────────────────────── */
+    .think-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+    .think-card{
+      background:#FAFAFA;border:1px solid var(--border);border-radius:10px;
+      padding:1rem;transition:border-color .2s;
+    }
+    .think-card:hover{border-color:var(--sf-blue)}
+    .think-card-icon{font-size:1.25rem;margin-bottom:.4rem}
+    .think-card-title{font-size:.85rem;font-weight:700;color:var(--sf-navy);margin-bottom:.35rem}
+    .think-card-text{font-size:.78rem;color:var(--text-mid);line-height:1.6}
+
+    .decision-tbl{width:100%;border-collapse:collapse;font-size:.78rem;margin-top:1rem}
+    .decision-tbl th{background:var(--sf-navy);color:#fff;padding:.55rem .75rem;text-align:left;font-weight:600;font-size:.72rem}
+    .decision-tbl td{padding:.55rem .75rem;border-bottom:1px solid var(--border);color:var(--text-mid);vertical-align:top}
+    .decision-tbl tr:hover td{background:#F3F2F2}
+    .decision-tbl td:first-child{color:var(--text);font-weight:600}
+    .rec-flow{color:var(--sf-teal);font-weight:700}
+    .rec-apex{color:var(--sf-orange);font-weight:700}
+
+    /* ── SIDEBAR ─────────────────────────────────── */
+    .side-col{display:flex;flex-direction:column;gap:1.5rem}
+
+    .contact-link{
+      display:flex;align-items:center;gap:.75rem;
+      padding:.7rem .9rem;border-radius:8px;border:1px solid var(--border);
+      text-decoration:none;background:#FAFAFA;
+      transition:border-color .2s,background .2s;
+    }
+    .contact-link:hover{border-color:var(--sf-blue);background:var(--sf-sky)}
+    .contact-link-icon{
+      width:36px;height:36px;border-radius:8px;
+      background:var(--sf-sky);border:1px solid rgba(0,112,210,.15);
+      display:flex;align-items:center;justify-content:center;
+      font-size:.95rem;flex-shrink:0;
+    }
+    .contact-link-label{font-size:.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px}
+    .contact-link-value{font-size:.83rem;color:var(--text);font-weight:500}
+
+    .avail-card{
+      background:linear-gradient(135deg,#032D60 0%,#0070D2 100%);
+      border-radius:var(--radius);padding:1.5rem;color:#fff;text-align:center;
+    }
+    .avail-dot{width:8px;height:8px;background:#27C93F;border-radius:50%;animation:blink 2s infinite;display:inline-block;margin-right:.4rem}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+    .avail-status{font-size:.78rem;font-weight:600;display:flex;align-items:center;justify-content:center;gap:.35rem;margin-bottom:.75rem;opacity:.9}
+    .avail-title{font-size:1rem;font-weight:700;margin-bottom:.5rem;line-height:1.3}
+    .avail-sub{font-size:.78rem;opacity:.75;line-height:1.5;margin-bottom:1rem}
+    .avail-btn{background:#fff;color:var(--sf-blue);border:none;padding:.6rem 1.2rem;border-radius:6px;font-size:.82rem;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity .15s}
+    .avail-btn:hover{opacity:.9}
+
+    .trailhead-card{
+      background:linear-gradient(135deg,#E8830A 0%,#FFB75D 100%);
+      border-radius:var(--radius);padding:1.25rem;color:#fff;
+    }
+    .th-title{font-size:.8rem;font-weight:700;margin-bottom:.75rem;opacity:.9;display:flex;align-items:center;gap:.4rem}
+    .th-points{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+    .th-stat{text-align:center;background:rgba(255,255,255,.15);border-radius:8px;padding:.6rem .8rem;flex:1}
+    .th-stat-num{font-size:1.2rem;font-weight:800;line-height:1}
+    .th-stat-label{font-size:.62rem;opacity:.8;margin-top:.2rem;text-transform:uppercase;letter-spacing:.3px}
+
+    /* ── ANIMATIONS ──────────────────────────────── */
+    .fade-up{opacity:0;transform:translateY(16px);transition:opacity .5s,transform .5s}
+    .fade-up.in{opacity:1;transform:none}
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer{
+      background:var(--sf-navy);color:rgba(255,255,255,.6);
+      text-align:center;padding:2rem;font-size:.8rem;
+    }
+    footer span{color:var(--sf-blue-light)}
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media(max-width:900px){
+      .main-grid{grid-template-columns:1fr}
+      .side-col{order:-1}
+      .think-grid{grid-template-columns:1fr}
+      .nav-links{display:none}
+      .profile-stats{margin-left:0;width:100%}
+      .trail-features{grid-template-columns:1fr}
+    }
+    @media(max-width:600px){
+      .profile-card{padding:0 1rem 1.5rem}
+      .sf-card-body{padding:1rem}
+      .profile-top{gap:1rem}
+      .banner-clouds{display:none}
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="logo">Yash Tiwari</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
+
+<!-- ═══════════════════ NAV ═══════════════════ -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <!-- Salesforce Cloud SVG Logo -->
+    <svg width="28" height="20" viewBox="0 0 54 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22.5 7.5C24.5 3.2 28.9 0 34 0c6.6 0 12 5 12.5 11.4C49 12.3 51 14.9 51 18c0 4.4-3.6 8-8 8H11C5.5 26 1 21.5 1 16c0-5 3.8-9.1 8.7-9.9 1-5 5.4-8.6 10.8-8.6 1.1 0 2.1.2 3 .5z" fill="white" opacity=".95"/>
+    </svg>
+    <span class="nav-logo-text">Salesforce</span>
+    <div class="nav-divider"></div>
+    <span class="nav-trail">Trailblazer Profile</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certs">Certifications</a></li>
+    <li><a href="#thinking">Approach</a></li>
+    <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════ HERO / PROFILE ═══════════════════ -->
+<div id="hero">
+  <div class="profile-banner">
+    <div class="banner-pattern"></div>
+    <div class="banner-clouds">
+      <!-- Decorative cloud shapes -->
+      <svg width="180" height="100" viewBox="0 0 54 38" fill="none"><path d="M22.5 7.5C24.5 3.2 28.9 0 34 0c6.6 0 12 5 12.5 11.4C49 12.3 51 14.9 51 18c0 4.4-3.6 8-8 8H11C5.5 26 1 21.5 1 16c0-5 3.8-9.1 8.7-9.9 1-5 5.4-8.6 10.8-8.6 1.1 0 2.1.2 3 .5z" fill="white"/></svg>
+      <svg width="120" height="70" viewBox="0 0 54 38" fill="none"><path d="M22.5 7.5C24.5 3.2 28.9 0 34 0c6.6 0 12 5 12.5 11.4C49 12.3 51 14.9 51 18c0 4.4-3.6 8-8 8H11C5.5 26 1 21.5 1 16c0-5 3.8-9.1 8.7-9.9 1-5 5.4-8.6 10.8-8.6 1.1 0 2.1.2 3 .5z" fill="white"/></svg>
+      <svg width="90" height="55" viewBox="0 0 54 38" fill="none"><path d="M22.5 7.5C24.5 3.2 28.9 0 34 0c6.6 0 12 5 12.5 11.4C49 12.3 51 14.9 51 18c0 4.4-3.6 8-8 8H11C5.5 26 1 21.5 1 16c0-5 3.8-9.1 8.7-9.9 1-5 5.4-8.6 10.8-8.6 1.1 0 2.1.2 3 .5z" fill="white"/></svg>
+      <!-- Lightning bolt -->
+      <svg width="40" height="60" viewBox="0 0 24 36" fill="none"><polygon points="13,0 4,20 11,20 11,36 20,16 13,16" fill="white"/></svg>
+    </div>
+  </div>
+
+  <div class="profile-container">
+    <div class="profile-card fade-up">
+      <div class="profile-top">
+        <div class="avatar-wrap">
+          <div class="avatar-ring">
+            <img src="./Yash passport size photo.jpeg" alt="Yash Tiwari" onerror="this.parentElement.innerHTML='<svg width=60 height=60 viewBox=&quot;0 0 60 60&quot; fill=none><circle cx=30 cy=22 r=14 fill=&quot;#0070D2&quot;/><ellipse cx=30 cy=52 rx=22 ry=14 fill=&quot;#0070D2&quot;/></svg>'"/>
+          </div>
+          <div class="rank-badge">
+            <!-- Lightning bolt rank icon -->
+            <svg width="14" height="20" viewBox="0 0 14 20" fill="none"><polygon points="8,0 2,11 7,11 6,20 12,9 7,9" fill="white"/></svg>
+          </div>
+        </div>
+
+        <div class="profile-info">
+          <div class="profile-name">Yash Tiwari</div>
+          <div class="profile-role">
+            <svg width="14" height="14" viewBox="0 0 54 38" fill="none"><path d="M22.5 7.5C24.5 3.2 28.9 0 34 0c6.6 0 12 5 12.5 11.4C49 12.3 51 14.9 51 18c0 4.4-3.6 8-8 8H11C5.5 26 1 21.5 1 16c0-5 3.8-9.1 8.7-9.9 1-5 5.4-8.6 10.8-8.6 1.1 0 2.1.2 3 .5z" fill="#0070D2"/></svg>
+            Salesforce Developer &nbsp;·&nbsp; Trailblazer
+          </div>
+          <div class="profile-location">
+            <svg width="12" height="14" viewBox="0 0 12 16" fill="none" stroke="#6B6B6B" stroke-width="1.5"><path d="M6 1C3.2 1 1 3.2 1 6c0 4 5 9 5 9s5-5 5-9c0-2.8-2.2-5-5-5z"/><circle cx="6" cy="6" r="2"/></svg>
+            Indore, Madhya Pradesh, India
+          </div>
+        </div>
+
+        <div class="profile-stats">
+          <div class="stat-pill">
+            <div class="stat-pill-num" style="color:var(--sf-orange)">1</div>
+            <div class="stat-pill-label">Certification</div>
+          </div>
+          <div class="stat-pill">
+            <div class="stat-pill-num">6+</div>
+            <div class="stat-pill-label">Months Exp</div>
+          </div>
+          <div class="stat-pill">
+            <div class="stat-pill-num">2</div>
+            <div class="stat-pill-label">Projects</div>
+          </div>
+          <div class="stat-pill">
+            <div class="stat-pill-num" style="color:var(--sf-teal)">BCA</div>
+            <div class="stat-pill-label">Degree</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-bio">
+        Results-driven Salesforce Developer with hands-on experience in <strong>Apex, Lightning Web Components (LWC), Flow Builder, and CRM customization</strong>. Completed a 6-month Salesforce Developer internship at Cyber Instant, Indore, delivering custom CRM solutions and workflow automation. <strong>Certified Salesforce AI Associate</strong> — passionate about leveraging Salesforce technologies to drive operational efficiency and digital transformation.
+      </div>
+
+      <div class="profile-tags">
+        <span class="ptag">Apex Developer</span>
+        <span class="ptag">LWC Specialist</span>
+        <span class="ptag orange">AI Associate Certified</span>
+        <span class="ptag teal">Flow Automation</span>
+        <span class="ptag green">Sales Cloud</span>
+        <span class="ptag green">Service Cloud</span>
+        <span class="ptag">REST API</span>
+        <span class="ptag">SOQL Expert</span>
+      </div>
+
+      <div class="profile-actions">
+        <a href="#projects" class="btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          View Projects
+        </a>
+        <a href="mailto:yashtiwari.sfdc@gmail.com" class="btn-outline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          Contact Me
+        </a>
+        <a href="https://www.linkedin.com/in/yashtiwari52/" target="_blank" rel="noopener" class="btn-outline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ BADGES ═══════════════════ -->
+<div id="badges">
+  <div class="badges-wrap">
+    <div class="badges-title">&#127942; Earned Badges &amp; Expertise</div>
+    <div class="badges-scroll">
+
+      <div class="badge-item">
+        <div class="badge-circle" style="--color:#0070D2;--pct:100%">
+          <div class="badge-circle-inner">
+            <!-- Salesforce cloud mini -->
+            <svg width="32" height="22" viewBox="0 0 54 38" fill="none"><path d="M22.5 7.5C24.5 3.2 28.9 0 34 0c6.6 0 12 5 12.5 11.4C49 12.3 51 14.9 51 18c0 4.4-3.6 8-8 8H11C5.5 26 1 21.5 1 16c0-5 3.8-9.1 8.7-9.9 1-5 5.4-8.6 10.8-8.6 1.1 0 2.1.2 3 .5z" fill="#0070D2"/></svg>
+          </div>
+        </div>
+        <div class="badge-label">AI Associate</div>
+      </div>
+
+      <div class="badge-item">
+        <div class="badge-circle" style="--color:#E8830A;--pct:95%">
+          <div class="badge-circle-inner">
+            <svg width="26" height="38" viewBox="0 0 14 20" fill="none"><polygon points="8,0 2,11 7,11 6,20 12,9 7,9" fill="#E8830A"/></svg>
+          </div>
+        </div>
+        <div class="badge-label">Apex Developer</div>
+      </div>
+
+      <div class="badge-item">
+        <div class="badge-circle" style="--color:#06A59A;--pct:90%">
+          <div class="badge-circle-inner">&#128187;</div>
+        </div>
+        <div class="badge-label">LWC Builder</div>
+      </div>
+
+      <div class="badge-item">
+        <div class="badge-circle" style="--color:#7526E3;--pct:85%">
+          <div class="badge-circle-inner">&#128260;</div>
+        </div>
+        <div class="badge-label">Flow Automator</div>
+      </div>
+
+      <div class="badge-item">
+        <div class="badge-circle" style="--color:#2E844A;--pct:88%">
+          <div class="badge-circle-inner">&#128200;</div>
+        </div>
+        <div class="badge-label">SOQL Expert</div>
+      </div>
+
+      <div class="badge-item">
+        <div class="badge-circle" style="--color:#032D60;--pct:80%">
+          <div class="badge-circle-inner">&#9729;&#65039;</div>
+        </div>
+        <div class="badge-label">Sales Cloud</div>
+      </div>
+
+      <div class="badge-item">
+        <div class="badge-circle" style="--color:#C23934;--pct:82%">
+          <div class="badge-circle-inner">&#128222;</div>
+        </div>
+        <div class="badge-label">Service Cloud</div>
+      </div>
+
+      <div class="badge-item">
+        <div class="badge-circle" style="--color:#E8830A;--pct:78%">
+          <div class="badge-circle-inner">&#128279;</div>
+        </div>
+        <div class="badge-label">REST API</div>
+      </div>
+
+      <div class="badge-item">
+        <div class="badge-circle" style="--color:#0070D2;--pct:92%">
+          <div class="badge-circle-inner">&#127959;</div>
+        </div>
+        <div class="badge-label">Data Modeler</div>
+      </div>
+
+      <div class="badge-item">
+        <div class="badge-circle" style="--color:#2E844A;--pct:85%">
+          <div class="badge-circle-inner">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E844A" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          </div>
+        </div>
+        <div class="badge-label">Git &amp; CLI</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ MAIN CONTENT ═══════════════════ -->
+<div class="main-grid">
+
+  <!-- LEFT COLUMN -->
+  <div class="main-col">
+
+    <!-- SKILLS -->
+    <div id="skills" class="sf-card fade-up">
+      <div class="sf-card-header">
+        <div class="sf-card-title">
+          <div class="sf-card-icon" style="background:#E8F4FF;">
+            <svg width="16" height="16" viewBox="0 0 54 38" fill="none"><path d="M22.5 7.5C24.5 3.2 28.9 0 34 0c6.6 0 12 5 12.5 11.4C49 12.3 51 14.9 51 18c0 4.4-3.6 8-8 8H11C5.5 26 1 21.5 1 16c0-5 3.8-9.1 8.7-9.9 1-5 5.4-8.6 10.8-8.6 1.1 0 2.1.2 3 .5z" fill="#0070D2"/></svg>
+          </div>
+          Technical Skills
+        </div>
+      </div>
+      <div class="sf-card-body">
+        <div class="skill-group">
+          <div class="skill-group-label">&#9889; Backend (Apex &amp; Data)</div>
+          <div class="skill-pills">
+            <span class="skill-pill sp-orange">Apex Classes &amp; Triggers</span>
+            <span class="skill-pill sp-orange">Queueable Apex</span>
+            <span class="skill-pill sp-orange">Batch Apex</span>
+            <span class="skill-pill sp-orange">@future Methods</span>
+            <span class="skill-pill sp-blue">SOQL &amp; SOSL</span>
+            <span class="skill-pill sp-blue">Data Modeling</span>
+            <span class="skill-pill sp-blue">Apex Test Classes</span>
+            <span class="skill-pill sp-blue">Governor Limits</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">&#128187; Frontend (LWC &amp; Web)</div>
+          <div class="skill-pills">
+            <span class="skill-pill sp-teal">Lightning Web Components</span>
+            <span class="skill-pill sp-teal">@wire Service</span>
+            <span class="skill-pill sp-teal">Imperative Apex</span>
+            <span class="skill-pill sp-navy">JavaScript (ES6+)</span>
+            <span class="skill-pill sp-navy">HTML5 &amp; CSS3</span>
+            <span class="skill-pill sp-navy">SLDS Framework</span>
+            <span class="skill-pill sp-navy">LMS &amp; Custom Events</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">&#128260; Automation &amp; Flows</div>
+          <div class="skill-pills">
+            <span class="skill-pill sp-purple">Record-Triggered Flows</span>
+            <span class="skill-pill sp-purple">Screen Flows</span>
+            <span class="skill-pill sp-purple">Approval Processes</span>
+            <span class="skill-pill sp-purple">Validation Rules</span>
+            <span class="skill-pill sp-purple">Workflow Automation</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">&#128296; Tools &amp; Platforms</div>
+          <div class="skill-pills">
+            <span class="skill-pill sp-green">Salesforce CLI</span>
+            <span class="skill-pill sp-green">VS Code + SF Extensions</span>
+            <span class="skill-pill sp-green">Git &amp; GitHub</span>
+            <span class="skill-pill sp-green">Developer Console</span>
+            <span class="skill-pill sp-blue">Sales Cloud</span>
+            <span class="skill-pill sp-blue">Service Cloud</span>
+            <span class="skill-pill sp-orange">REST API</span>
+            <span class="skill-pill sp-orange">Named Credentials</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div id="projects">
+      <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;">
+        <!-- Superbadge icon -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" fill="#E8830A"/></svg>
+        Projects &amp; Superbadges
+      </div>
+
+      <!-- Trail Card 1 -->
+      <div class="trail-card fade-up" style="margin-bottom:1.25rem">
+        <div class="trail-header">
+          <div class="trail-icon" style="background:linear-gradient(135deg,#0070D2,#06A59A);">
+            <!-- Headset / Service icon -->
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+          </div>
+          <div class="trail-meta">
+            <div class="trail-type">&#11088; Superbadge Project &nbsp;·&nbsp; Service Cloud</div>
+            <div class="trail-title">Customer Support Ticket Management System</div>
+          </div>
+        </div>
+
+        <div class="trail-tags">
+          <span class="trail-tag">Apex Trigger</span><span class="trail-tag">Queueable</span>
+          <span class="trail-tag">LWC Dashboard</span><span class="trail-tag">Record-Triggered Flow</span>
+          <span class="trail-tag">SOQL</span><span class="trail-tag">Reports</span>
+        </div>
+
+        <div class="trail-problem">
+          <div class="trail-problem-label">&#9655; Business Problem</div>
+          <div class="trail-problem-text">Support agents were manually triaging and assigning cases, leading to SLA breaches, inconsistent prioritization, and zero real-time visibility into ticket workloads.</div>
+        </div>
+
+        <div class="trail-arch-wrap">
+          <div class="trail-arch-label">&#9655; Solution Architecture</div>
+          <div class="trail-arch-chips">
+            <span class="arch-chip">Case Object</span><span class="arch-chip">after insert Trigger</span>
+            <span class="arch-chip">Queueable Apex</span><span class="arch-chip">RT Flow (SLA)</span>
+            <span class="arch-chip">LWC Dashboard</span><span class="arch-chip">Email Alerts</span>
+          </div>
+        </div>
+
+        <div class="trail-features">
+          <div class="trail-feat"><span class="ck">&#10003;</span> Auto case assignment via Queueable (governor-safe)</div>
+          <div class="trail-feat"><span class="ck">&#10003;</span> Priority engine based on configurable business rules</div>
+          <div class="trail-feat"><span class="ck">&#10003;</span> SLA monitoring with automated email notifications</div>
+          <div class="trail-feat"><span class="ck">&#10003;</span> Real-time LWC ticket dashboard for support agents</div>
+          <div class="trail-feat"><span class="ck">&#10003;</span> KPI dashboards for resolution time &amp; team performance</div>
+          <div class="trail-feat"><span class="ck">&#10003;</span> Fully bulkified — handles batch case imports cleanly</div>
+        </div>
+
+        <div class="trail-code">
+          <div class="code-bar">
+            <div class="code-filename"><div class="code-dot"></div>CaseTrigger.cls + CaseAssignmentEngine.cls</div>
+            <div class="code-badge">Bulkified</div>
+          </div>
+          <pre class="trail-pre"><span class="cmt">// Thin trigger — 100% logic in Queueable handler</span>
+<span class="kw">trigger</span> <span class="cls">CaseTrigger</span> <span class="kw">on</span> <span class="cls">Case</span> (after insert) {
+    System.<span class="fn">enqueueJob</span>(<span class="kw">new</span> <span class="cls">CaseAssignmentEngine</span>(Trigger.newMap.keySet()));
+}
+
+<span class="kw">public class</span> <span class="cls">CaseAssignmentEngine</span> <span class="kw">implements</span> <span class="cls">Queueable</span> {
+    <span class="kw">private</span> Set&lt;Id&gt; caseIds;
+    <span class="kw">public</span> <span class="fn">CaseAssignmentEngine</span>(Set&lt;Id&gt; ids) { <span class="kw">this</span>.caseIds = ids; }
+
+    <span class="kw">public void</span> <span class="fn">execute</span>(QueueableContext ctx) {
+        <span class="cmt">// Single SOQL — bulkified across all inserted cases</span>
+        List&lt;Case&gt; cases = [SELECT Id, Priority, Type, OwnerId
+                             FROM Case WHERE Id IN :caseIds AND Status = <span class="str">'New'</span>];
+        Map&lt;String, Id&gt; queueMap = <span class="fn">getQueueMap</span>();
+        List&lt;Case&gt; toUpdate = <span class="kw">new</span> List&lt;Case&gt;();
+
+        <span class="kw">for</span> (Case c : cases) {
+            String q = <span class="fn">resolveQueue</span>(c.Priority, c.Type);
+            <span class="kw">if</span> (queueMap.containsKey(q)) { c.OwnerId = queueMap.get(q); toUpdate.add(c); }
+        }
+        <span class="cmt">// Partial success — errors logged, batch not aborted</span>
+        <span class="kw">if</span> (!toUpdate.isEmpty()) <span class="fn">logErrors</span>(Database.<span class="fn">update</span>(toUpdate, <span class="kw">false</span>));
+    }
+}</pre>
+        </div>
+        <div class="trail-footer">
+          <span class="ptag green" style="font-size:.72rem;">&#10003; Completed</span>
+        </div>
+      </div>
+
+      <!-- Trail Card 2 -->
+      <div class="trail-card fade-up" style="margin-bottom:1.25rem">
+        <div class="trail-header">
+          <div class="trail-icon" style="background:linear-gradient(135deg,#7526E3,#B07DF0);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="trail-meta">
+            <div class="trail-type">&#11088; Superbadge Project &nbsp;·&nbsp; Custom Objects + LWC</div>
+            <div class="trail-title">Employee Leave Management System</div>
+          </div>
+        </div>
+
+        <div class="trail-tags">
+          <span class="trail-tag">Custom Objects</span><span class="trail-tag">LWC Portal</span>
+          <span class="trail-tag">Approval Process</span><span class="trail-tag">RT Flow</span>
+          <span class="trail-tag">Permission Sets</span><span class="trail-tag">Role Hierarchy</span>
+        </div>
+
+        <div class="trail-problem">
+          <div class="trail-problem-label">&#9655; Business Problem</div>
+          <div class="trail-problem-text">HR team managed leave requests over email and spreadsheets — no audit trail, manual approval routing, and zero visibility into leave balances or team coverage.</div>
+        </div>
+
+        <div class="trail-arch-wrap">
+          <div class="trail-arch-label">&#9655; Solution Architecture</div>
+          <div class="trail-arch-chips">
+            <span class="arch-chip">Leave_Request__c</span><span class="arch-chip">Leave_Balance__c</span>
+            <span class="arch-chip">Employee__c</span><span class="arch-chip">Multi-step Approval</span>
+            <span class="arch-chip">RT Flow (balance update)</span><span class="arch-chip">Role Hierarchy</span>
+          </div>
+        </div>
+
+        <div class="trail-features">
+          <div class="trail-feat"><span class="ck">&#10003;</span> Custom schema with Master-Detail relationships</div>
+          <div class="trail-feat"><span class="ck">&#10003;</span> LWC portal with real-time balance check pre-submit</div>
+          <div class="trail-feat"><span class="ck">&#10003;</span> Employee &#8594; Manager &#8594; HR approval routing by role</div>
+          <div class="trail-feat"><span class="ck">&#10003;</span> RT Flow updates balance on approve/reject</div>
+          <div class="trail-feat"><span class="ck">&#10003;</span> Permission sets enforce field-level security</div>
+          <div class="trail-feat"><span class="ck">&#10003;</span> Status dashboard visible to all stakeholders</div>
+        </div>
+
+        <div class="trail-code">
+          <div class="code-bar">
+            <div class="code-filename"><div class="code-dot" style="background:#7526E3"></div>leaveRequestForm.js</div>
+            <div class="code-badge">LWC</div>
+          </div>
+          <pre class="trail-pre"><span class="kw">import</span> { LightningElement, track, wire } <span class="kw">from</span> <span class="str">'lwc'</span>;
+<span class="kw">import</span> { ShowToastEvent } <span class="kw">from</span> <span class="str">'lightning/platformShowToastEvent'</span>;
+<span class="kw">import</span> getLeaveBalance <span class="kw">from</span> <span class="str">'@salesforce/apex/LeaveController.getLeaveBalance'</span>;
+<span class="kw">import</span> submitLeaveRequest <span class="kw">from</span> <span class="str">'@salesforce/apex/LeaveController.submitLeaveRequest'</span>;
+
+<span class="kw">export default class</span> <span class="cls">LeaveRequestForm</span> <span class="kw">extends</span> LightningElement {
+    <span class="ann">@track</span> leaveType = <span class="str">''</span>;
+    <span class="ann">@track</span> availableBalance = <span class="num">0</span>;
+    <span class="ann">@track</span> isSubmitting = <span class="kw">false</span>;
+
+    <span class="cmt">// Reactive: wire re-fetches when leaveType changes</span>
+    <span class="ann">@wire</span>(getLeaveBalance, { leaveType: <span class="str">'$leaveType'</span> })
+    wiredBalance({ data, error }) {
+        <span class="kw">if</span> (data) <span class="kw">this</span>.availableBalance = data;
+    }
+
+    <span class="fn">handleSubmit</span>() {
+        <span class="kw">const</span> days = <span class="kw">this</span>.<span class="fn">calcDays</span>(<span class="kw">this</span>.startDate, <span class="kw">this</span>.endDate);
+        <span class="kw">if</span> (days > <span class="kw">this</span>.availableBalance) {
+            <span class="kw">this</span>.<span class="fn">dispatchEvent</span>(<span class="kw">new</span> <span class="cls">ShowToastEvent</span>({
+                title: <span class="str">'Insufficient Balance'</span>,
+                message: <span class="str">`Only ${this.availableBalance} day(s) available.`</span>,
+                variant: <span class="str">'warning'</span>
+            }));
+            <span class="kw">return</span>;
+        }
+        <span class="kw">this</span>.isSubmitting = <span class="kw">true</span>;
+        <span class="fn">submitLeaveRequest</span>({ leaveType: <span class="kw">this</span>.leaveType, days })
+            .<span class="fn">then</span>(() => <span class="kw">this</span>.<span class="fn">dispatchEvent</span>(<span class="kw">new</span> <span class="cls">ShowToastEvent</span>({
+                title: <span class="str">'Success'</span>, message: <span class="str">'Submitted for approval.'</span>, variant: <span class="str">'success'</span>
+            })))
+            .<span class="fn">finally</span>(() => <span class="kw">this</span>.isSubmitting = <span class="kw">false</span>);
+    }
+}</pre>
+        </div>
+        <div class="trail-footer">
+          <span class="ptag green" style="font-size:.72rem;">&#10003; Completed</span>
+        </div>
+      </div>
+
+      <!-- Trail Card 3 -->
+      <div class="trail-card fade-up">
+        <div class="trail-header">
+          <div class="trail-icon" style="background:linear-gradient(135deg,#E8830A,#FFB75D);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="trail-meta">
+            <div class="trail-type">&#11088; Integration Project &nbsp;·&nbsp; REST API</div>
+            <div class="trail-title">External REST API Integration — ERP Sync via Apex</div>
+          </div>
+        </div>
+
+        <div class="trail-tags">
+          <span class="trail-tag">@future Callout</span><span class="trail-tag">Named Credentials</span>
+          <span class="trail-tag">JSON Wrapper</span><span class="trail-tag">HttpCalloutMock</span><span class="trail-tag">Error Logging</span>
+        </div>
+
+        <div class="trail-problem">
+          <div class="trail-problem-label">&#9655; Business Problem</div>
+          <div class="trail-problem-text">Business needed real-time Account data sync to an external ERP whenever a key field was updated — without blocking user interaction or hitting trigger callout restrictions.</div>
+        </div>
+
+        <div class="trail-arch-wrap">
+          <div class="trail-arch-label">&#9655; Solution Architecture</div>
+          <div class="trail-arch-chips">
+            <span class="arch-chip">Account (after update)</span><span class="arch-chip">@future(callout=true)</span>
+            <span class="arch-chip">Named Credentials</span><span class="arch-chip">ERPPayload wrapper</span>
+            <span class="arch-chip">HTTP 200/400/500 handling</span><span class="arch-chip">Custom Error Log</span>
+          </div>
+        </div>
+
+        <div class="trail-features">
+          <div class="trail-feat"><span class="ck">&#10003;</span> @future bypasses "no callouts after DML" rule</div>
+          <div class="trail-feat"><span class="ck">&#10003;</span> Named Credentials — zero hardcoded endpoints</div>
+          <div class="trail-feat"><span class="ck">&#10003;</span> JSON built via wrapper class, not string concat</div>
+          <div class="trail-feat"><span class="ck">&#10003;</span> All HTTP status codes explicitly handled</div>
+          <div class="trail-feat"><span class="ck">&#10003;</span> Failures logged to custom object for ops visibility</div>
+          <div class="trail-feat"><span class="ck">&#10003;</span> Test class uses HttpCalloutMock interface</div>
+        </div>
+
+        <div class="trail-code">
+          <div class="code-bar">
+            <div class="code-filename"><div class="code-dot" style="background:#E8830A"></div>ERPIntegrationService.cls</div>
+            <div class="code-badge">REST API</div>
+          </div>
+          <pre class="trail-pre"><span class="kw">public class</span> <span class="cls">ERPIntegrationService</span> {
+
+    <span class="ann">@future</span>(callout=<span class="kw">true</span>)  <span class="cmt">// async — avoids "callout after DML" exception</span>
+    <span class="kw">public static void</span> <span class="fn">syncAccountToERP</span>(Id accountId) {
+        Account acc = [SELECT Id, Name, Phone, BillingCity, Industry
+                       FROM Account WHERE Id = :accountId LIMIT 1];
+
+        <span class="cmt">// Wrapper class builds clean JSON — no string concat risk</span>
+        HttpRequest req = <span class="kw">new</span> HttpRequest();
+        req.<span class="fn">setEndpoint</span>(<span class="str">'callout:ERP_System/api/accounts'</span>); <span class="cmt">// Named Credential</span>
+        req.<span class="fn">setMethod</span>(<span class="str">'POST'</span>);
+        req.<span class="fn">setHeader</span>(<span class="str">'Content-Type'</span>, <span class="str">'application/json'</span>);
+        req.<span class="fn">setBody</span>(JSON.<span class="fn">serialize</span>(<span class="kw">new</span> <span class="cls">ERPPayload</span>(acc)));
+        req.<span class="fn">setTimeout</span>(<span class="num">10000</span>);
+
+        HttpResponse res = <span class="kw">new</span> Http().<span class="fn">send</span>(req);
+        <span class="kw">if</span> (res.<span class="fn">getStatusCode</span>() != <span class="num">200</span>)
+            <span class="fn">logIntegrationError</span>(accountId, res.<span class="fn">getStatusCode</span>(), res.<span class="fn">getBody</span>());
+    }
+
+    <span class="kw">public class</span> <span class="cls">ERPPayload</span> {
+        <span class="kw">public</span> String sfId, name, phone, city, industry;
+        <span class="kw">public</span> <span class="fn">ERPPayload</span>(Account a) {
+            sfId=a.Id; name=a.Name; phone=a.Phone; city=a.BillingCity; industry=a.Industry;
+        }
+    }
+}</pre>
+        </div>
+        <div class="trail-footer">
+          <span class="ptag green" style="font-size:.72rem;">&#10003; Completed</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div id="experience" class="sf-card fade-up">
+      <div class="sf-card-header">
+        <div class="sf-card-title">
+          <div class="sf-card-icon" style="background:#FFF3E0;">&#127942;</div>
+          Experience &amp; Education
+        </div>
+      </div>
+      <div class="sf-card-body">
+        <div class="timeline-item">
+          <div class="timeline-dot-wrap">
+            <div class="timeline-dot"></div>
+            <div class="timeline-line"></div>
+          </div>
+          <div class="timeline-content">
+            <div class="tl-role">Salesforce Developer Intern</div>
+            <div class="tl-company">Cyber Instant &nbsp;&#183;&nbsp; Indore, India &nbsp;&#183;&nbsp; On-site</div>
+            <div class="tl-date">Feb 2025 – Jul 2025</div>
+            <ul class="tl-list">
+              <li><span class="arr">&#8594;</span><div>Built <strong>custom Lightning Web Components</strong> for internal Salesforce tools — improved agent productivity and real-time data visibility.</div></li>
+              <li><span class="arr">&#8594;</span><div>Implemented <strong>Apex triggers on Account &amp; Contact</strong> to automate business logic, enforce validation, eliminate manual steps.</div></li>
+              <li><span class="arr">&#8594;</span><div>Wrote <strong>optimized bulkified SOQL queries</strong> — avoided N+1 anti-patterns, improved CRM data retrieval performance.</div></li>
+              <li><span class="arr">&#8594;</span><div>Customized <strong>Sales Cloud</strong> — page layouts, custom fields, record types, Flow Builder automation, Validation Rules.</div></li>
+              <li><span class="arr">&#8594;</span><div>Managed full dev lifecycle: <strong>dev sandbox &#8594; test &#8594; deploy via Salesforce CLI</strong> and VS Code extensions.</div></li>
+              <li><span class="arr">&#8594;</span><div>Collaborated in a team using <strong>Git &amp; GitHub</strong> for version control, code reviews, and coordinated deployments.</div></li>
             </ul>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Hello, I'm Yash Tiwari</h1>
-            <p>Full Stack Developer | Web Designer | Problem Solver</p>
-            <a href="#projects" class="cta-button">View My Work</a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <p>I'm a passionate developer with expertise in creating modern, responsive web applications. I love turning ideas into reality through clean, efficient code and intuitive design.</p>
-            <div class="about-grid">
-                <div class="about-item">
-                    <h3>🎯 Focused</h3>
-                    <p>Dedicated to delivering high-quality solutions</p>
-                </div>
-                <div class="about-item">
-                    <h3>💻 Skilled</h3>
-                    <p>Proficient in modern web technologies</p>
-                </div>
-                <div class="about-item">
-                    <h3>🚀 Innovative</h3>
-                    <p>Always exploring new tools and techniques</p>
-                </div>
+            <div class="tl-impacts">
+              <span class="tl-impact">&#8595; Manual effort via automation</span>
+              <span class="tl-impact">&#8593; Query performance</span>
+              <span class="tl-impact">&#10003; Bulkified patterns</span>
+              <span class="tl-impact">&#10003; Git deployments</span>
             </div>
+          </div>
         </div>
-    </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2>Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>Project One</h3>
-                    <p>A responsive web application built with modern technologies</p>
-                    <div class="project-tags">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JavaScript</span>
-                    </div>
-                    <a href="#" class="project-link">View Project →</a>
-                </div>
-                <div class="project-card">
-                    <h3>Project Two</h3>
-                    <p>An interactive application showcasing front-end skills</p>
-                    <div class="project-tags">
-                        <span>React</span>
-                        <span>JavaScript</span>
-                        <span>CSS</span>
-                    </div>
-                    <a href="#" class="project-link">View Project →</a>
-                </div>
-                <div class="project-card">
-                    <h3>Project Three</h3>
-                    <p>A full-stack application with backend integration</p>
-                    <div class="project-tags">
-                        <span>JavaScript</span>
-                        <span>Node.js</span>
-                        <span>Database</span>
-                    </div>
-                    <a href="#" class="project-link">View Project →</a>
-                </div>
+        <div class="timeline-item">
+          <div class="timeline-dot-wrap">
+            <div class="timeline-dot" style="background:var(--sf-teal)"></div>
+          </div>
+          <div class="timeline-content">
+            <div class="tl-role">Bachelor of Computer Applications (BCA)</div>
+            <div class="tl-company">Medi-Caps University &nbsp;&#183;&nbsp; Indore, Madhya Pradesh</div>
+            <div class="tl-date">2022 – 2025</div>
+            <ul class="tl-list">
+              <li><span class="arr" style="color:var(--sf-teal)">&#8594;</span><div>Core coursework: <strong>OOP, Database Systems, Web Development</strong>, and Software Engineering fundamentals.</div></li>
+              <li><span class="arr" style="color:var(--sf-teal)">&#8594;</span><div>Pursued Salesforce development in parallel via <strong>Trailhead, self-directed projects</strong>, and AI Associate certification.</div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THINKING / APPROACH -->
+    <div id="thinking" class="sf-card fade-up">
+      <div class="sf-card-header">
+        <div class="sf-card-title">
+          <div class="sf-card-icon" style="background:#F5EEFF;">&#129504;</div>
+          How I Think as a Salesforce Developer
+        </div>
+      </div>
+      <div class="sf-card-body">
+        <div class="think-grid">
+          <div class="think-card">
+            <div class="think-card-icon">&#127919;</div>
+            <div class="think-card-title">Requirements before code</div>
+            <div class="think-card-text">Map business process first — objects, data volume, user roles. Design for 10,000 records from day one, not 10.</div>
+          </div>
+          <div class="think-card">
+            <div class="think-card-icon">&#9878;&#65039;</div>
+            <div class="think-card-title">Declarative-first principle</div>
+            <div class="think-card-text">If a Flow solves it cleanly — use it. Apex is a deliberate choice for bulk operations or complex logic, not the default.</div>
+          </div>
+          <div class="think-card">
+            <div class="think-card-icon">&#128207;</div>
+            <div class="think-card-title">Governor limits by design</div>
+            <div class="think-card-text">Plan around 150 SOQL / 10K DML / 100 callout limits before writing line one. Async Apex is first-class, not a hotfix.</div>
+          </div>
+          <div class="think-card">
+            <div class="think-card-icon">&#128274;</div>
+            <div class="think-card-title">Security model is non-negotiable</div>
+            <div class="think-card-text">CRUD, FLS, and sharing rules by design. Deliberate <code style="font-size:.75em;background:#F3F2F2;padding:.1rem .3rem;border-radius:3px">with/without sharing</code> decisions in every Apex class.</div>
+          </div>
+          <div class="think-card">
+            <div class="think-card-icon">&#128269;</div>
+            <div class="think-card-title">Debug before guess</div>
+            <div class="think-card-text">Developer Console logs, structured System.debug, test class isolation — understand root cause before adding workarounds.</div>
+          </div>
+          <div class="think-card">
+            <div class="think-card-icon">&#128260;</div>
+            <div class="think-card-title">Maintenance is a feature</div>
+            <div class="think-card-text">Thin triggers, named constants, test methods describing behavior not coverage. Code is read 10&#215; more than it's written.</div>
+          </div>
+        </div>
+
+        <!-- Decision table -->
+        <table class="decision-tbl" style="margin-top:1.5rem">
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th>Approach</th>
+              <th>Why</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Auto-update field on save</td><td><span class="rec-flow">Record-Triggered Flow</span></td><td>Admin-maintainable, no code deploy</td></tr>
+            <tr><td>Multi-step guided user process</td><td><span class="rec-flow">Screen Flow</span></td><td>Built-in UI &amp; validation, no LWC needed</td></tr>
+            <tr><td>Complex branching logic</td><td><span class="rec-apex">Apex Class</span></td><td>Testable, version-controlled, debuggable</td></tr>
+            <tr><td>Processing 50,000+ records</td><td><span class="rec-apex">Batch Apex</span></td><td>Flows hit row limits; Batch handles scale</td></tr>
+            <tr><td>External HTTP API callout</td><td><span class="rec-apex">Apex @future / Queueable</span></td><td>Async required; Named Credentials for security</td></tr>
+            <tr><td>Simple approval workflow</td><td><span class="rec-flow">Approval Process</span></td><td>Declarative, audit trail built-in</td></tr>
+            <tr><td>Cross-object update at scale</td><td><span class="rec-apex">Apex Trigger + Handler</span></td><td>Reliable at bulk; Flows have row limits</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /main-col -->
+
+  <!-- RIGHT SIDEBAR -->
+  <div class="side-col">
+
+    <!-- Availability CTA -->
+    <div class="avail-card fade-up">
+      <div class="avail-status"><span class="avail-dot"></span>Open to Opportunities</div>
+      <div class="avail-title">Ready to build something great on Salesforce?</div>
+      <div class="avail-sub">Looking for Salesforce Developer roles. Available immediately for interviews and discussions.</div>
+      <a href="mailto:yashtiwari.sfdc@gmail.com" class="avail-btn">
+        &#9993;&#65039; Send Me an Email
+      </a>
+    </div>
+
+    <!-- Trailhead stats card -->
+    <div class="trailhead-card fade-up">
+      <div class="th-title">
+        <!-- Trailhead mountain icon SVG -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M13.5 5.5L9 14h9l-4.5-8.5zm0-3.5L3 20h21L13.5 2z"/></svg>
+        Trailhead Activity
+      </div>
+      <div class="th-points">
+        <div class="th-stat"><div class="th-stat-num">1</div><div class="th-stat-label">Cert</div></div>
+        <div class="th-stat"><div class="th-stat-num">6+</div><div class="th-stat-label">Months</div></div>
+        <div class="th-stat"><div class="th-stat-num">3</div><div class="th-stat-label">Projects</div></div>
+        <div class="th-stat"><div class="th-stat-num">&#8734;</div><div class="th-stat-label">Trails</div></div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div id="contact" class="sf-card fade-up">
+      <div class="sf-card-header">
+        <div class="sf-card-title">
+          <div class="sf-card-icon" style="background:#E8F4FF;">&#128172;</div>
+          Contact
+        </div>
+      </div>
+      <div class="sf-card-body" style="display:flex;flex-direction:column;gap:.65rem">
+        <a href="mailto:yashtiwari.sfdc@gmail.com" class="contact-link">
+          <div class="contact-link-icon">&#9993;&#65039;</div>
+          <div><div class="contact-link-label">Email</div><div class="contact-link-value">yashtiwari.sfdc@gmail.com</div></div>
+        </a>
+        <a href="https://www.linkedin.com/in/yashtiwari52/" target="_blank" rel="noopener" class="contact-link">
+          <div class="contact-link-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#0070D2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-value">linkedin.com/in/yashtiwari52</div></div>
+        </a>
+        <a href="tel:+918959459494" class="contact-link">
+          <div class="contact-link-icon">&#128241;</div>
+          <div><div class="contact-link-label">Phone</div><div class="contact-link-value">+91 89594 59494</div></div>
+        </a>
+        <a href="#" class="contact-link">
+          <div class="contact-link-icon">&#128205;</div>
+          <div><div class="contact-link-label">Location</div><div class="contact-link-value">Indore, MP, India</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Certifications -->
+    <div id="certs" class="sf-card fade-up">
+      <div class="sf-card-header">
+        <div class="sf-card-title">
+          <div class="sf-card-icon" style="background:#E8F4FF;">
+            <svg width="16" height="16" viewBox="0 0 54 38" fill="none"><path d="M22.5 7.5C24.5 3.2 28.9 0 34 0c6.6 0 12 5 12.5 11.4C49 12.3 51 14.9 51 18c0 4.4-3.6 8-8 8H11C5.5 26 1 21.5 1 16c0-5 3.8-9.1 8.7-9.9 1-5 5.4-8.6 10.8-8.6 1.1 0 2.1.2 3 .5z" fill="#0070D2"/></svg>
+          </div>
+          Certifications
+        </div>
+      </div>
+      <div class="sf-card-body" style="display:flex;flex-direction:column;gap:.65rem">
+
+        <div class="cert-badge-card">
+          <div class="cert-badge-icon" style="background:linear-gradient(135deg,#E8830A,#FFB75D);">
+            <!-- Robot/AI icon -->
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1" fill="white"/><line x1="8" y1="16" x2="8" y2="16" stroke-width="3"/><line x1="16" y1="16" x2="16" y2="16" stroke-width="3"/></svg>
+          </div>
+          <div>
+            <div class="cert-name">Salesforce AI Associate</div>
+            <div class="cert-by">Salesforce &nbsp;&#183;&nbsp; Official</div>
+            <div class="cert-date">Earned: 2024</div>
+            <div class="cert-status cs-verified">&#10003; Verified</div>
+          </div>
+        </div>
+
+        <div class="cert-badge-card" style="opacity:.7">
+          <div class="cert-badge-icon" style="background:linear-gradient(135deg,#0070D2,#06A59A);">
+            <svg width="28" height="28" viewBox="0 0 54 38" fill="none"><path d="M22.5 7.5C24.5 3.2 28.9 0 34 0c6.6 0 12 5 12.5 11.4C49 12.3 51 14.9 51 18c0 4.4-3.6 8-8 8H11C5.5 26 1 21.5 1 16c0-5 3.8-9.1 8.7-9.9 1-5 5.4-8.6 10.8-8.6 1.1 0 2.1.2 3 .5z" fill="white"/></svg>
+          </div>
+          <div>
+            <div class="cert-name">Salesforce Administrator</div>
+            <div class="cert-by">Salesforce</div>
+            <div class="cert-date">In Progress — 2025</div>
+            <div class="cert-status cs-progress">&#8635; Pursuing</div>
+          </div>
+        </div>
+
+        <div class="cert-badge-card" style="opacity:.7">
+          <div class="cert-badge-icon" style="background:linear-gradient(135deg,#7526E3,#B07DF0);">
+            <svg width="26" height="34" viewBox="0 0 14 20" fill="none"><polygon points="8,0 2,11 7,11 6,20 12,9 7,9" fill="white"/></svg>
+          </div>
+          <div>
+            <div class="cert-name">Platform Developer I</div>
+            <div class="cert-by">Salesforce</div>
+            <div class="cert-date">Planned — 2025</div>
+            <div class="cert-status cs-progress">&#8635; Planned</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Salesforce Ecosystem card -->
+    <div class="sf-card fade-up">
+      <div class="sf-card-header">
+        <div class="sf-card-title">
+          <div class="sf-card-icon" style="background:#EFF7EE;">&#127759;</div>
+          Salesforce Ecosystem
+        </div>
+      </div>
+      <div class="sf-card-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
+          <div style="background:var(--sf-sky);border-radius:8px;padding:.65rem;text-align:center">
+            <div style="font-size:1.2rem">&#9729;&#65039;</div>
+            <div style="font-size:.7rem;font-weight:700;color:var(--sf-blue);margin-top:.25rem">Sales Cloud</div>
+          </div>
+          <div style="background:#E8F9F8;border-radius:8px;padding:.65rem;text-align:center">
+            <div style="font-size:1.2rem">&#128222;</div>
+            <div style="font-size:.7rem;font-weight:700;color:var(--sf-teal);margin-top:.25rem">Service Cloud</div>
+          </div>
+          <div style="background:#FFF3E0;border-radius:8px;padding:.65rem;text-align:center">
+            <div style="font-size:1.2rem">
+              <svg width="20" height="20" viewBox="0 0 14 20" fill="none"><polygon points="8,0 2,11 7,11 6,20 12,9 7,9" fill="#E8830A"/></svg>
             </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2>Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Frontend</h3>
-                    <ul>
-                        <li>HTML5 & CSS3</li>
-                        <li>JavaScript (ES6+)</li>
-                        <li>React.js</li>
-                        <li>Responsive Design</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Backend</h3>
-                    <ul>
-                        <li>Node.js</li>
-                        <li>Express</li>
-                        <li>REST APIs</li>
-                        <li>Database Design</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Tools & Others</h3>
-                    <ul>
-                        <li>Git & GitHub</li>
-                        <li>VS Code</li>
-                        <li>Figma</li>
-                        <li>Web Performance</li>
-                    </ul>
-                </div>
+            <div style="font-size:.7rem;font-weight:700;color:var(--sf-orange);margin-top:.25rem">Apex / LWC</div>
+          </div>
+          <div style="background:#F5EEFF;border-radius:8px;padding:.65rem;text-align:center">
+            <div style="font-size:1.2rem">&#128260;</div>
+            <div style="font-size:.7rem;font-weight:700;color:var(--sf-purple);margin-top:.25rem">Flow Builder</div>
+          </div>
+          <div style="background:#EFF7EE;border-radius:8px;padding:.65rem;text-align:center">
+            <div style="font-size:1.2rem">&#128279;</div>
+            <div style="font-size:.7rem;font-weight:700;color:var(--sf-green);margin-top:.25rem">REST API</div>
+          </div>
+          <div style="background:#E8EEFF;border-radius:8px;padding:.65rem;text-align:center">
+            <div style="font-size:1.2rem">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#032D60" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
             </div>
+            <div style="font-size:.7rem;font-weight:700;color:var(--sf-navy);margin-top:.25rem">GitHub</div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Get In Touch</h2>
-            <p>I'd love to hear from you! Feel free to reach out.</p>
-            <div class="contact-links">
-                <a href="mailto:your.email@example.com" class="contact-link">Email</a>
-                <a href="https://github.com/yourusername" class="contact-link">GitHub</a>
-                <a href="https://linkedin.com/in/yourusername" class="contact-link">LinkedIn</a>
-                <a href="https://twitter.com/yourusername" class="contact-link">Twitter</a>
-            </div>
-        </div>
-    </section>
+  </div><!-- /side-col -->
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Yash Tiwari. All rights reserved.</p>
-        </div>
-    </footer>
+</div><!-- /main-grid -->
 
-    <script src="script.js"></script>
+<!-- FOOTER -->
+<footer>
+  <div style="display:flex;align-items:center;justify-content:center;gap:.75rem;margin-bottom:.75rem">
+    <svg width="24" height="17" viewBox="0 0 54 38" fill="none"><path d="M22.5 7.5C24.5 3.2 28.9 0 34 0c6.6 0 12 5 12.5 11.4C49 12.3 51 14.9 51 18c0 4.4-3.6 8-8 8H11C5.5 26 1 21.5 1 16c0-5 3.8-9.1 8.7-9.9 1-5 5.4-8.6 10.8-8.6 1.1 0 2.1.2 3 .5z" fill="rgba(255,255,255,.4)"/></svg>
+    <span><span>Yash Tiwari</span> &nbsp;&#183;&nbsp; Salesforce Trailblazer &nbsp;&#183;&nbsp; Indore, India</span>
+  </div>
+  <div>yashtiwari.sfdc@gmail.com &nbsp;&#183;&nbsp; linkedin.com/in/yashtiwari52 &nbsp;&#183;&nbsp; +91 89594 59494</div>
+</footer>
+
+<script>
+  // Fade-up on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('in'), i * 70);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  // Nav active highlight
+  const secs = document.querySelectorAll('section[id], div[id]');
+  const navAs = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+    navAs.forEach(a => {
+      a.style.background = '';
+      a.style.color = '';
+      if (a.getAttribute('href') === '#' + cur && !a.classList.contains('nav-cta')) {
+        a.style.background = 'rgba(255,255,255,.12)';
+        a.style.color = '#fff';
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
