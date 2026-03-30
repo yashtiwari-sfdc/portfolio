@@ -1,133 +1,143 @@
-# Yash Tiwari - Portfolio
+# Yash Tiwari - Professional Portfolio
 
-A modern, responsive portfolio website built with HTML5, CSS3, and Vanilla JavaScript.
+**Salesforce Developer | Lightning Web Components | Apex Developer**
 
-## Features
-
-- 🎨 **Modern Design** - Clean and professional UI with gradient accents
-- 📱 **Fully Responsive** - Works seamlessly on all devices
-- ✨ **Smooth Animations** - Engaging scroll animations and transitions
-- 🎯 **Well Organized** - Clear sections for projects, skills, and contact
-- ⚡ **Fast Performance** - Lightweight static site with no dependencies
-- 🎭 **Interactive** - Smooth navigation and element animations
-
-## Sections
-
-- **Home** - Introduction and call-to-action
-- **About** - Brief overview and key strengths
-- **Projects** - Featured portfolio projects with tags
-- **Skills** - Organized skill categories
-- **Contact** - Multiple ways to get in touch
-
-## Files Structure
-
-```
-.
-├── index.html      # Main HTML file
-├── style.css       # Styling and responsive design
-├── script.js       # Interactivity and animations
-├── .gitignore      # Git ignore rules
-└── README.md       # This file
-```
-
-## Getting Started
-
-### Local Development
-
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/portfolio.git
-cd portfolio
-```
-
-2. Open in browser:
-   - Simply open `index.html` in your web browser
-   - Or use a local server:
-   ```bash
-   python -m http.server 8000
-   # or
-   npx http-server
-   ```
-
-3. Visit `http://localhost:8000` in your browser
-
-## Customization
-
-### Update Personal Information
-
-Edit `index.html` to customize:
-- Your name and title in the hero section
-- About section content
-- Project details and links
-- Contact information and social links
-
-### Modify Styling
-
-Edit `style.css` to customize:
-- Color scheme (modify CSS variables in `:root`)
-- Fonts and typography
-- Layout and spacing
-- Animations and transitions
-
-### Add Interactivity
-
-Edit `script.js` to add:
-- Form submissions
-- Additional animations
-- Smooth scroll behavior
-- Analytics integration
-
-## Color Scheme
-
-The default color scheme uses:
-- **Primary**: #667eea (Blue-Purple)
-- **Secondary**: #764ba2 (Purple)
-- **Text Dark**: #2d3748
-- **Text Light**: #718096
-- **Background**: #f7fafc
-
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-
-## Performance
-
-Lighthouse Metrics:
-- **Performance**: 95+
-- **Accessibility**: 95+
-- **Best Practices**: 100
-- **SEO**: 100
-
-## Deployment
-
-### Deploy to GitHub Pages
-
-1. Create a GitHub repository named `username.github.io`
-2. Push this code to the repository
-3. Your portfolio will be live at `https://username.github.io`
-
-### Deploy to Other Platforms
-
-- **Netlify**: Drag and drop the folder or connect GitHub
-- **Vercel**: Import the repository and deploy
-- **Firebase Hosting**: Build and deploy with Firebase
-- **AWS S3 + CloudFront**: Static site hosting
-
-## License
-
-This project is open source and available under the MIT License.
-
-## Contact
-
-Feel free to reach out:
-- 📧 Email: your.email@example.com
-- 🐙 GitHub: [Your GitHub Profile]
-- 💼 LinkedIn: [Your LinkedIn Profile]
-- 🐦 Twitter: [Your Twitter Profile]
+Indore, Madhya Pradesh | +91 8959459494 | [yashtiwari.sfdc@gmail.com](mailto:yashtiwari.sfdc@gmail.com)  
+[LinkedIn](https://linkedin.com/in/yash-tiwari) | [GitHub](https://github.com/yashtiwari-sfdc)
 
 ---
 
-Made with ❤️ by Yash Tiwari
+## 📋 Professional Summary
+
+Results-driven Salesforce Developer with hands-on experience in Apex, Lightning Web Components (LWC), Flow Builder, and CRM customization. Proven ability to design scalable Salesforce solutions using custom objects, triggers, validation rules, and declarative automation tools. Experienced in building responsive UI components with LWC and integrating backend logic using Apex and SOQL. Completed a 6-month Salesforce Developer internship delivering custom CRM solutions and workflow automation. **Certified Salesforce AI Associate** with a passion for leveraging Salesforce technologies to drive operational efficiency and digital transformation.
+
+---
+
+## 🛠️ Technical Skills
+
+### Salesforce Development
+- **Apex Programming** - Classes, Triggers, Async Operations
+- **Lightning Web Components (LWC)** - Custom UI Development
+- **SOQL & SOSL Queries** - Data Retrieval & Optimization
+- **Apex Triggers & Batch Processing** - Automation & Scalability
+- **Data Modeling** - Object Relationships, Lookups, Master-Detail
+
+### Salesforce Administration
+- **Sales Cloud Configuration** - Custom Objects, Fields, Record Types
+- **Flow Builder** - Screen & Record-Triggered Flows
+- **Automation** - Workflow Automation, Validation Rules, Process Builder
+- **Security Model** - Profiles, Permission Sets, Role Hierarchies
+
+### Frontend Development
+- **HTML5, CSS3, JavaScript (ES6+)**
+- **LWC UI Development** - Responsive Components
+- **Responsive Design** - Mobile-First Approach
+
+### Tools & Platforms
+- **Salesforce CLI** | **Developer Console** | **VS Code + Salesforce Extensions**
+- **Git & GitHub** | **Version Control** | **Sandbox Environments**
+
+---
+
+## 🏆 Certifications
+
+**Salesforce AI Associate** - Salesforce (2024)
+
+---
+
+## 💼 Experience
+
+### Salesforce Developer Intern
+**Cyber Instant** | Indore, India | Feb 2025 – Jul 2025
+
+- Developed custom **Lightning Web Components (LWC)** to build responsive user interfaces for internal Salesforce tools, improving agent productivity
+- Implemented **Apex triggers** on standard objects (Account, Contact) for business logic automation and data validation
+- Wrote optimized **SOQL queries** for efficient data retrieval and improved CRM structure through object relationships
+- Customized **Salesforce Sales Cloud** including page layouts, custom fields, record types, and workflow automation
+- Managed development in **Salesforce sandbox environments** using Salesforce CLI and VS Code extensions
+- Collaborated with cross-functional teams using **Git and GitHub** for version control and code quality
+
+---
+
+## 📁 Featured Projects
+
+### 1. Customer Support Ticket Management System
+**Salesforce Solution** | Feb 2025 - Apr 2025
+
+- Developed comprehensive case management system to streamline customer support operations
+- **Key Features:**
+  - Apex triggers for automated case assignment and priority management
+  - Interactive LWC dashboards for support agents with real-time ticket data
+  - Record-triggered flows for SLA alerts and automated email notifications
+  - Salesforce reports and dashboards for KPI monitoring and team performance metrics
+- **Impact:** Reduced ticket resolution time by optimizing workflow automation
+
+### 2. Employee Leave Management System
+**Salesforce Solution** | Apr 2025 - Jul 2025
+
+- Built Salesforce-based HR leave management system with automated approval workflows
+- **Key Features:**
+  - Custom objects for leave requests, employee records, and leave balances
+  - Interactive LWC components for leave request submission and real-time status tracking
+  - Multi-step approval processes using record-triggered flows
+  - Role hierarchy and permission sets for data security and access control
+- **Impact:** Reduced manual HR overhead through automated manager approvals and notifications
+
+---
+
+## 📚 Education
+
+**Bachelor of Computer Applications (BCA)**  
+Medi-Caps University, Indore | 2022 – 2025
+
+---
+
+## 🌟 Additional Strengths
+
+✅ Strong understanding of CRM architecture and Salesforce ecosystem  
+✅ Hands-on experience with both declarative and programmatic development  
+✅ Proficient in debugging (Developer Console, debug logs, problem-solving)  
+✅ Committed to continuous learning through Trailhead and community engagement  
+✅ Proven ability to deliver scalable, maintainable Salesforce solutions
+
+---
+
+## 🚀 About This Portfolio
+
+This portfolio is built with **HTML5**, **CSS3**, and **Vanilla JavaScript** to showcase professional work and technical expertise.
+
+### Features
+- 📱 Fully Responsive Design
+- ✨ Smooth Animations & Interactions
+- 🎨 Modern, Professional UI
+- ⚡ Fast Performance (No Dependencies)
+
+### Local Development
+
+Clone and run locally:
+```bash
+git clone https://github.com/yashtiwari-sfdc/portfolio.git
+cd portfolio
+# Open index.html in your browser or use a local server
+```
+
+### Deploy to GitHub Pages
+
+Your portfolio is already set up for deployment:
+1. GitHub Pages enabled in repository settings
+2. Live at: `https://yashtiwari-sfdc.github.io/portfolio/`
+
+---
+
+## 📞 Get In Touch
+
+I'm always interested in new Salesforce opportunities and collaboration!
+
+- 📧 **Email:** [yashtiwari.sfdc@gmail.com](mailto:yashtiwari.sfdc@gmail.com)
+- 💼 **LinkedIn:** [linkedin.com/in/yash-tiwari](https://linkedin.com/in/yash-tiwari)
+- 🐙 **GitHub:** [github.com/yashtiwari-sfdc](https://github.com/yashtiwari-sfdc)
+- 📱 **Phone:** +91 8959459494
+
+---
+
+Made with ❤️ by Yash Tiwari | Salesforce Certified AI Associate
