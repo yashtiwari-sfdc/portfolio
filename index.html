@@ -144,32 +144,40 @@
 
     .profile-top{display:flex;align-items:flex-end;gap:1.5rem;padding-top:1.25rem;flex-wrap:wrap}
 
-    .avatar-wrap{position:relative;flex-shrink:0;margin-top:-82px}
+    .avatar-wrap{position:relative;flex-shrink:0;margin-top:-82px;z-index:2}
     .avatar-wrap::before{
       content:'';
-      position:absolute;inset:-10px;
+      position:absolute;inset:-12px;
       border-radius:50%;
-      background:radial-gradient(circle, rgba(27,150,255,.24) 0%, rgba(6,165,154,.12) 42%, transparent 72%);
-      filter:blur(6px);
+      background:radial-gradient(circle, rgba(27,150,255,.18) 0%, rgba(6,165,154,.09) 46%, transparent 74%);
+      filter:blur(8px);
       animation:avatarAura 4.5s ease-in-out infinite;
     }
     .avatar-wrap::after{
       content:'';
-      position:absolute;inset:-18px;
+      position:absolute;inset:-14px;
       border-radius:50%;
-      border:1px solid rgba(255,255,255,.55);
-      opacity:.65;
-      animation:haloSpin 14s linear infinite;
+      border:1px solid rgba(255,255,255,.42);
+      opacity:.5;
+      animation:haloSpin 18s linear infinite;
     }
     .avatar-ring{
       width:148px;height:148px;border-radius:50%;
       border:5px solid rgba(255,255,255,.95);
-      box-shadow:0 18px 34px rgba(3,45,96,.22);
-      overflow:hidden;background:var(--sf-sky);
+      box-shadow:0 20px 40px rgba(3,45,96,.24);
+      overflow:hidden;background:linear-gradient(180deg,#dff2ff 0%, #f7fbff 100%);
       display:flex;align-items:center;justify-content:center;
       position:relative;
       transform:translateZ(0);
       transition:transform .45s ease, box-shadow .45s ease;
+    }
+    .avatar-ring::after{
+      content:'';
+      position:absolute;inset:7px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.35);
+      pointer-events:none;
+      z-index:1;
     }
     .avatar-ring::before{
       content:'';
@@ -178,8 +186,14 @@
       pointer-events:none;
       z-index:1;
     }
-    .avatar-ring img{width:100%;height:100%;object-fit:cover;object-position:center 18%;transform:scale(1.08);filter:saturate(1.05) contrast(1.03)}
-    .profile-card:hover .avatar-ring{transform:translateY(-4px) scale(1.02);box-shadow:0 24px 42px rgba(3,45,96,.24)}
+    .avatar-ring img{
+      width:100%;height:100%;
+      object-fit:cover;
+      object-position:center 14%;
+      transform:scale(1.02);
+      filter:saturate(1.03) contrast(1.02) brightness(1.01);
+    }
+    .profile-card:hover .avatar-ring{transform:translateY(-4px) scale(1.02);box-shadow:0 26px 46px rgba(3,45,96,.26)}
     .rank-badge{
       position:absolute;bottom:4px;right:4px;
       width:32px;height:32px;border-radius:50%;
@@ -632,8 +646,8 @@
       .profile-top{gap:1rem;align-items:flex-start}
       .banner-clouds{display:none}
       .profile-banner{height:168px}
-      .avatar-ring{width:124px;height:124px}
-      .avatar-wrap{margin-top:-72px}
+      .avatar-ring{width:128px;height:128px}
+      .avatar-wrap{margin-top:-74px}
       .profile-info{min-width:100%}
       .profile-name{font-size:1.35rem}
       .profile-role{font-size:.8rem;flex-wrap:wrap}
@@ -658,8 +672,8 @@
       nav{padding:0 .8rem}
       .profile-container,.badges-wrap,.main-grid{padding-left:.8rem;padding-right:.8rem}
       .profile-card{padding:0 .85rem 1.25rem}
-      .avatar-ring{width:112px;height:112px}
-      .avatar-wrap{margin-top:-64px}
+      .avatar-ring{width:118px;height:118px}
+      .avatar-wrap{margin-top:-66px}
       .profile-name{font-size:1.22rem}
       .badge-item{width:76px}
       .trail-tag,.arch-chip{font-size:.64rem}
