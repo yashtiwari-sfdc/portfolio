@@ -289,30 +289,9 @@
     .trail-feat .ck{color:var(--sf-green);flex-shrink:0}
 
     /* Code block inside trail card */
-    .trail-code{margin:.75rem 0 0;border-top:1px solid var(--border)}
-    .code-bar{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:.5rem 1rem;background:#F9FAFB;border-bottom:1px solid var(--border);
-    }
-    .code-filename{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text-soft);display:flex;align-items:center;gap:.4rem}
-    .code-dot{width:7px;height:7px;border-radius:50%;background:var(--sf-blue)}
-    .code-badge{font-size:.65rem;padding:.15rem .5rem;border-radius:3px;background:#EFF7EE;color:var(--sf-green);font-weight:700;font-family:'JetBrains Mono',monospace;text-transform:uppercase}
-    .trail-pre{
-      margin:0;padding:1rem 1.25rem;
-      font-family:'JetBrains Mono',monospace;font-size:.73rem;
-      line-height:1.75;color:#24292e;background:#F6F8FA;
-      overflow-x:auto;white-space:pre;
-    }
     .trail-footer{padding:.75rem 1.5rem 1.25rem;display:flex;justify-content:flex-end}
 
     /* â”€â”€ SYNTAX COLORS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-    .kw{color:#D73A49}
-    .cls{color:#6F42C1}
-    .fn{color:#005CC5}
-    .str{color:#032F62}
-    .cmt{color:#6A737D;font-style:italic}
-    .num{color:#005CC5}
-    .ann{color:#E36209}
 
     /* â”€â”€ TIMELINE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .timeline-item{
@@ -766,36 +745,6 @@
           <div class="trail-feat"><span class="ck">&#10003;</span> Security model configured with role hierarchy, profiles, and permission sets</div>
         </div>
 
-        <div class="trail-code">
-          <div class="code-bar">
-            <div class="code-filename"><div class="code-dot"></div>CaseTrigger.cls + CaseAssignmentEngine.cls</div>
-            <div class="code-badge">Bulkified</div>
-          </div>
-          <pre class="trail-pre"><span class="cmt">// Thin trigger &mdash; 100% logic in Queueable handler</span>
-<span class="kw">trigger</span> <span class="cls">CaseTrigger</span> <span class="kw">on</span> <span class="cls">Case</span> (after insert) {
-    System.<span class="fn">enqueueJob</span>(<span class="kw">new</span> <span class="cls">CaseAssignmentEngine</span>(Trigger.newMap.keySet()));
-}
-
-<span class="kw">public class</span> <span class="cls">CaseAssignmentEngine</span> <span class="kw">implements</span> <span class="cls">Queueable</span> {
-    <span class="kw">private</span> Set&lt;Id&gt; caseIds;
-    <span class="kw">public</span> <span class="fn">CaseAssignmentEngine</span>(Set&lt;Id&gt; ids) { <span class="kw">this</span>.caseIds = ids; }
-
-    <span class="kw">public void</span> <span class="fn">execute</span>(QueueableContext ctx) {
-        <span class="cmt">// Single SOQL &mdash; bulkified across all inserted cases</span>
-        List&lt;Case&gt; cases = [SELECT Id, Priority, Type, OwnerId
-                             FROM Case WHERE Id IN :caseIds AND Status = <span class="str">'New'</span>];
-        Map&lt;String, Id&gt; queueMap = <span class="fn">getQueueMap</span>();
-        List&lt;Case&gt; toUpdate = <span class="kw">new</span> List&lt;Case&gt;();
-
-        <span class="kw">for</span> (Case c : cases) {
-            String q = <span class="fn">resolveQueue</span>(c.Priority, c.Type);
-            <span class="kw">if</span> (queueMap.containsKey(q)) { c.OwnerId = queueMap.get(q); toUpdate.add(c); }
-        }
-        <span class="cmt">// Partial success &mdash; errors logged, batch not aborted</span>
-        <span class="kw">if</span> (!toUpdate.isEmpty()) <span class="fn">logErrors</span>(Database.<span class="fn">update</span>(toUpdate, <span class="kw">false</span>));
-    }
-}</pre>
-        </div>
         <div class="trail-footer">
           <span class="ptag green" style="font-size:.72rem;">&#10003; Completed</span>
         </div>
@@ -842,46 +791,6 @@
           <div class="trail-feat"><span class="ck">&#10003;</span> Real-time visibility for employees, managers, and HR admins</div>
         </div>
 
-        <div class="trail-code">
-          <div class="code-bar">
-            <div class="code-filename"><div class="code-dot" style="background:#7526E3"></div>leaveRequestForm.js</div>
-            <div class="code-badge">LWC</div>
-          </div>
-          <pre class="trail-pre"><span class="kw">import</span> { LightningElement, track, wire } <span class="kw">from</span> <span class="str">'lwc'</span>;
-<span class="kw">import</span> { ShowToastEvent } <span class="kw">from</span> <span class="str">'lightning/platformShowToastEvent'</span>;
-<span class="kw">import</span> getLeaveBalance <span class="kw">from</span> <span class="str">'@salesforce/apex/LeaveController.getLeaveBalance'</span>;
-<span class="kw">import</span> submitLeaveRequest <span class="kw">from</span> <span class="str">'@salesforce/apex/LeaveController.submitLeaveRequest'</span>;
-
-<span class="kw">export default class</span> <span class="cls">LeaveRequestForm</span> <span class="kw">extends</span> LightningElement {
-    <span class="ann">@track</span> leaveType = <span class="str">''</span>;
-    <span class="ann">@track</span> availableBalance = <span class="num">0</span>;
-    <span class="ann">@track</span> isSubmitting = <span class="kw">false</span>;
-
-    <span class="cmt">// Reactive: wire re-fetches when leaveType changes</span>
-    <span class="ann">@wire</span>(getLeaveBalance, { leaveType: <span class="str">'$leaveType'</span> })
-    wiredBalance({ data, error }) {
-        <span class="kw">if</span> (data) <span class="kw">this</span>.availableBalance = data;
-    }
-
-    <span class="fn">handleSubmit</span>() {
-        <span class="kw">const</span> days = <span class="kw">this</span>.<span class="fn">calcDays</span>(<span class="kw">this</span>.startDate, <span class="kw">this</span>.endDate);
-        <span class="kw">if</span> (days > <span class="kw">this</span>.availableBalance) {
-            <span class="kw">this</span>.<span class="fn">dispatchEvent</span>(<span class="kw">new</span> <span class="cls">ShowToastEvent</span>({
-                title: <span class="str">'Insufficient Balance'</span>,
-                message: <span class="str">`Only ${this.availableBalance} day(s) available.`</span>,
-                variant: <span class="str">'warning'</span>
-            }));
-            <span class="kw">return</span>;
-        }
-        <span class="kw">this</span>.isSubmitting = <span class="kw">true</span>;
-        <span class="fn">submitLeaveRequest</span>({ leaveType: <span class="kw">this</span>.leaveType, days })
-            .<span class="fn">then</span>(() => <span class="kw">this</span>.<span class="fn">dispatchEvent</span>(<span class="kw">new</span> <span class="cls">ShowToastEvent</span>({
-                title: <span class="str">'Success'</span>, message: <span class="str">'Submitted for approval.'</span>, variant: <span class="str">'success'</span>
-            })))
-            .<span class="fn">finally</span>(() => <span class="kw">this</span>.isSubmitting = <span class="kw">false</span>);
-    }
-}</pre>
-        </div>
         <div class="trail-footer">
           <span class="ptag green" style="font-size:.72rem;">&#10003; Completed</span>
         </div>
