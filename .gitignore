@@ -1,0 +1,40 @@
+# OS Files
+.DS_Store
+Thumbs.db
+*.log
+
+# Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build Outputs
+dist/
+build/
+.next/
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# IDE Specific
+.project
+.classpath
+*.iml
+
+# Misc
+.cache/
+.claude/
+.sfdx/
+*.docx
+*.jpeg
+*.jpg
+*.png
