@@ -53,6 +53,23 @@
     .nav-divider{width:1px;height:24px;background:rgba(255,255,255,.25);flex-shrink:0}
     .nav-trail{color:rgba(255,255,255,.7);font-size:.82rem;font-weight:500}
     .nav-links{display:flex;gap:0;list-style:none;margin-left:auto}
+    .nav-toggle{
+      display:none;margin-left:auto;width:42px;height:42px;border-radius:10px;
+      border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);
+      color:#fff;align-items:center;justify-content:center;cursor:pointer;
+      transition:background .2s ease, transform .2s ease, border-color .2s ease;
+    }
+    .nav-toggle:hover{background:rgba(255,255,255,.14);transform:translateY(-1px);border-color:rgba(255,255,255,.28)}
+    .nav-toggle-lines,.nav-toggle-lines::before,.nav-toggle-lines::after{
+      content:'';display:block;width:18px;height:2px;border-radius:999px;background:currentColor;
+      transition:transform .22s ease, opacity .22s ease;
+    }
+    .nav-toggle-lines{position:relative}
+    .nav-toggle-lines::before{position:absolute;top:-6px}
+    .nav-toggle-lines::after{position:absolute;top:6px}
+    .nav-open .nav-toggle-lines{transform:rotate(45deg)}
+    .nav-open .nav-toggle-lines::before{transform:translateY(6px) rotate(90deg)}
+    .nav-open .nav-toggle-lines::after{transform:translateY(-6px);opacity:0}
     .nav-links a{
       position:relative;
       color:rgba(255,255,255,.8);text-decoration:none;font-size:.82rem;
@@ -196,7 +213,7 @@
       display:flex;gap:1.5rem;margin-left:auto;flex-wrap:wrap;
       padding-bottom:.25rem;
     }
-    .stat-pill{text-align:center}
+    .stat-pill{text-align:center;min-width:74px}
     .stat-pill-num{font-size:1.4rem;font-weight:800;color:var(--sf-navy);line-height:1}
     .stat-pill-label{font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-top:.2rem;white-space:nowrap}
 
@@ -251,10 +268,10 @@
     #badges{padding:2rem 0}
     .badges-wrap{max-width:1100px;margin:0 auto;padding:0 2rem}
     .badges-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:1rem}
-    .badges-scroll{display:flex;gap:1rem;overflow-x:auto;padding-bottom:.5rem;scrollbar-width:thin}
+    .badges-scroll{display:flex;gap:1rem;overflow-x:auto;padding-bottom:.5rem;scrollbar-width:thin;scroll-snap-type:x proximity}
     .badge-item{
       flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:.5rem;
-      width:90px;text-align:center;
+      width:90px;text-align:center;scroll-snap-align:start;
     }
     .badge-circle{
       width:72px;height:72px;border-radius:50%;
@@ -443,6 +460,7 @@
     .think-card-text{font-size:.78rem;color:var(--text-mid);line-height:1.6}
 
     .decision-tbl{width:100%;border-collapse:collapse;font-size:.78rem;margin-top:1rem}
+    .decision-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px}
     .decision-tbl th{background:var(--sf-navy);color:#fff;padding:.55rem .75rem;text-align:left;font-weight:600;font-size:.72rem}
     .decision-tbl td{padding:.55rem .75rem;border-bottom:1px solid var(--border);color:var(--text-mid);vertical-align:top}
     .decision-tbl tr:hover td{background:#F3F2F2}
@@ -503,7 +521,7 @@
     .trailhead-card:hover{transform:translateY(-5px);box-shadow:0 18px 34px rgba(232,131,10,.24)}
     .th-title{font-size:.8rem;font-weight:700;margin-bottom:.75rem;opacity:.9;display:flex;align-items:center;gap:.4rem}
     .th-points{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
-    .th-stat{text-align:center;background:rgba(255,255,255,.15);border-radius:8px;padding:.6rem .8rem;flex:1}
+    .th-stat{text-align:center;background:rgba(255,255,255,.15);border-radius:8px;padding:.6rem .8rem;flex:1;min-width:120px}
     .th-stat-num{font-size:1.2rem;font-weight:800;line-height:1}
     .th-stat-label{font-size:.62rem;opacity:.8;margin-top:.2rem;text-transform:uppercase;letter-spacing:.3px}
 
@@ -569,21 +587,82 @@
     footer span{color:var(--sf-blue-light)}
 
     /* â”€â”€ RESPONSIVE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    @media(min-width:1280px){
+      .profile-container,.badges-wrap,.main-grid{max-width:1180px}
+      .main-grid{grid-template-columns:minmax(0,1fr) 360px}
+    }
+    @media(max-width:1024px){
+      .main-grid{grid-template-columns:minmax(0,1fr) 320px;padding:0 1.5rem 3rem}
+      .profile-container,.badges-wrap{padding:0 1.5rem}
+      .profile-stats{gap:1rem}
+      .trail-features{grid-template-columns:1fr}
+      .decision-tbl{font-size:.74rem}
+    }
     @media(max-width:900px){
+      nav{padding:0 1rem}
+      .nav-toggle{display:inline-flex}
+      .nav-links{
+        position:absolute;top:calc(100% + 10px);left:1rem;right:1rem;margin-left:0;
+        background:rgba(3,45,96,.98);border:1px solid rgba(255,255,255,.09);
+        border-radius:16px;padding:.6rem;box-shadow:0 18px 34px rgba(3,45,96,.26);
+        display:flex;flex-direction:column;gap:.15rem;opacity:0;pointer-events:none;
+        transform:translateY(-8px) scale(.98);transform-origin:top center;
+        transition:opacity .22s ease, transform .22s ease;
+      }
+      .nav-links.open{opacity:1;pointer-events:auto;transform:translateY(0) scale(1)}
+      .nav-links a{padding:.8rem .95rem}
+      .nav-links a::after{left:.95rem;right:.95rem;bottom:.45rem}
       .main-grid{grid-template-columns:1fr}
       .side-col{order:-1}
       .think-grid{grid-template-columns:1fr}
-      .nav-links{display:none}
-      .profile-stats{margin-left:0;width:100%}
+      .profile-stats{margin-left:0;width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.75rem 1rem}
+      .profile-actions a{flex:1 1 220px;justify-content:center}
       .trail-features{grid-template-columns:1fr}
+      .contact-link{padding:.85rem .95rem}
+      .side-col{gap:1rem}
     }
     @media(max-width:600px){
-      .profile-card{padding:0 1rem 1.5rem}
+      nav{height:58px}
+      .nav-logo-text{font-size:.92rem}
+      .nav-divider,.nav-trail{display:none}
+      .profile-container,.badges-wrap,.main-grid{padding-left:1rem;padding-right:1rem}
+      .profile-card{padding:0 1rem 1.5rem;margin-top:-68px}
       .sf-card-body{padding:1rem}
-      .profile-top{gap:1rem}
+      .sf-card-header{padding:1rem}
+      .profile-top{gap:1rem;align-items:flex-start}
       .banner-clouds{display:none}
+      .profile-banner{height:168px}
       .avatar-ring{width:124px;height:124px}
       .avatar-wrap{margin-top:-72px}
+      .profile-info{min-width:100%}
+      .profile-name{font-size:1.35rem}
+      .profile-role{font-size:.8rem;flex-wrap:wrap}
+      .profile-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+      .stat-pill{padding:.55rem .35rem;border-radius:12px;background:#fafafa;border:1px solid var(--border)}
+      .profile-actions{flex-direction:column}
+      .profile-actions a{width:100%;justify-content:center}
+      .trail-header{padding:1rem 1rem 0;gap:.85rem}
+      .trail-tags,.trail-arch-wrap,.trail-features{padding-left:1rem;padding-right:1rem}
+      .trail-problem{margin-left:1rem;margin-right:1rem}
+      .trail-footer{padding-left:1rem;padding-right:1rem}
+      .trail-icon{width:46px;height:46px}
+      .trail-title{font-size:.94rem}
+      .badge-item{width:82px}
+      .th-points{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+      .contact-link{align-items:flex-start}
+      .contact-link-value{word-break:break-word}
+      .decision-tbl{min-width:620px}
+      footer{padding:1.5rem 1rem}
+    }
+    @media(max-width:420px){
+      nav{padding:0 .8rem}
+      .profile-container,.badges-wrap,.main-grid{padding-left:.8rem;padding-right:.8rem}
+      .profile-card{padding:0 .85rem 1.25rem}
+      .avatar-ring{width:112px;height:112px}
+      .avatar-wrap{margin-top:-64px}
+      .profile-name{font-size:1.22rem}
+      .badge-item{width:76px}
+      .trail-tag,.arch-chip{font-size:.64rem}
     }
     @media(prefers-reduced-motion:reduce){
       html{scroll-behavior:auto}
@@ -605,7 +684,10 @@
     <div class="nav-divider"></div>
     <span class="nav-trail">Developer Portfolio</span>
   </a>
-  <ul class="nav-links">
+  <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-nav">
+    <span class="nav-toggle-lines"></span>
+  </button>
+  <ul class="nav-links" id="site-nav">
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
@@ -1072,7 +1154,8 @@
         </div>
 
         <!-- Decision table -->
-        <table class="decision-tbl" style="margin-top:1.5rem">
+        <div class="decision-wrap" style="margin-top:1.5rem">
+        <table class="decision-tbl">
           <thead>
             <tr>
               <th>Scenario</th>
@@ -1090,6 +1173,7 @@
             <tr><td>Cross-object update at scale</td><td><span class="rec-apex">Apex Trigger + Handler</span></td><td>Reliable at bulk; Flows have row limits</td></tr>
           </tbody>
         </table>
+        </div>
       </div>
     </div>
 
@@ -1334,6 +1418,38 @@
   });
 
   // Smooth scrolling with fixed-nav offset
+  const nav = document.querySelector('nav');
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  const closeMobileNav = () => {
+    if (!nav || !navToggle || !navLinks) return;
+    nav.classList.remove('nav-open');
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  };
+
+  if (nav && navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      nav.classList.toggle('nav-open', isOpen);
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMobileNav);
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) closeMobileNav();
+    });
+
+    document.addEventListener('click', event => {
+      if (window.innerWidth > 900) return;
+      if (!nav.contains(event.target)) closeMobileNav();
+    });
+  }
+
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', event => {
       const href = anchor.getAttribute('href');
