@@ -38,3 +38,4 @@ build/
 *.jpeg
 *.jpg
 *.png
+!Yash passport size photo.jpeg
