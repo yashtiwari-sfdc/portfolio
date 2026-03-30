@@ -97,7 +97,7 @@ Medi-Caps University, Indore | 2022 – 2025
 ✅ Strong understanding of CRM architecture and Salesforce ecosystem  
 ✅ Hands-on experience with both declarative and programmatic development  
 ✅ Proficient in debugging (Developer Console, debug logs, problem-solving)  
-✅ Committed to continuous learning through Trailhead and community engagement  
+✅ Committed to continuous learning through certifications, projects, and community engagement  
 ✅ Proven ability to deliver scalable, maintainable Salesforce solutions
 
 ---
