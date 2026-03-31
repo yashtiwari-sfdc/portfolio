@@ -14,25 +14,41 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Add animation to elements on scroll
 const observerOptions = {
-    threshold: 0.1,
+    threshold: 0.15,
     rootMargin: '0px 0px -100px 0px'
 };
 
 const observer = new IntersectionObserver(function(entries) {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.classList.add('visible');
         }
     });
 }, observerOptions);
 
-// Observe all project cards and skill items
-document.querySelectorAll('.project-card, .skill-category, .about-item').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+// Observe common section elements
+document.querySelectorAll('.section-animate, .project-card, .skill-category, .about-item').forEach(el => {
+    el.classList.add('section-animate');
     observer.observe(el);
+});
+
+// Project card 3D hover tilt effect
+document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * 7;
+        const rotateY = ((x - centerX) / centerX) * -7;
+
+        card.style.transform = `translateY(-6px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+    });
 });
 
 // Highlight the current navigation link based on scroll position
